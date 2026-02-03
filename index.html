@@ -7,12 +7,12 @@
     <meta name="description" content="Hyper-concentrated, enzyme-powered laundry detergent. One splooge. That's it.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #FDF6EC;
             --white: #FFFFFF;
-            --black: #1A1A1A;
+            --black: #0F0F0F;
             --coral: #FF6B5B;
             --coral-light: #FFE5E2;
             --yellow: #FFE55C;
@@ -20,10 +20,8 @@
             --mint: #98E4C9;
             --mint-light: #E5F9F2;
             --lavender: #C7B8EA;
-            --lavender-light: #F3EEFF;
-            --blue: #5B9FFF;
-            --text: #1A1A1A;
-            --text-muted: #666666;
+            --text: #0F0F0F;
+            --text-muted: #555555;
         }
 
         * {
@@ -37,7 +35,7 @@
         }
 
         body {
-            font-family: 'DM Sans', -apple-system, sans-serif;
+            font-family: 'Outfit', -apple-system, sans-serif;
             background: var(--cream);
             color: var(--text);
             line-height: 1.6;
@@ -45,23 +43,18 @@
         }
 
         ::selection {
-            background: var(--yellow);
-            color: var(--black);
+            background: var(--coral);
+            color: var(--white);
         }
 
-        /* Fun Shapes */
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
+        /* Typography */
+        .headline {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
         }
-
-        .blob-1 { width: 300px; height: 300px; background: var(--coral-light); top: 10%; left: -5%; }
-        .blob-2 { width: 250px; height: 250px; background: var(--mint-light); top: 60%; right: -5%; }
-        .blob-3 { width: 200px; height: 200px; background: var(--yellow-light); top: 30%; right: 10%; }
 
         /* Sticker styles */
         .sticker {
@@ -71,18 +64,17 @@
             padding: 0.5rem 1rem;
             background: var(--yellow);
             color: var(--black);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border-radius: 100px;
             border: 2px solid var(--black);
             box-shadow: 3px 3px 0 var(--black);
-            transform: rotate(-2deg);
-            white-space: nowrap;
         }
 
         .sticker.coral { background: var(--coral); color: white; }
         .sticker.mint { background: var(--mint); }
-        .sticker.lavender { background: var(--lavender); }
 
         /* Navigation */
         nav {
@@ -100,11 +92,13 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
             color: var(--black);
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
 
         .nav-links {
@@ -116,9 +110,10 @@
         .nav-links a {
             text-decoration: none;
             color: var(--text);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            transition: color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .nav-links a:hover {
@@ -131,9 +126,11 @@
             justify-content: center;
             gap: 0.5rem;
             padding: 0.875rem 1.5rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             text-decoration: none;
             border-radius: 100px;
             border: 2px solid var(--black);
@@ -152,11 +149,6 @@
             box-shadow: 6px 6px 0 var(--black);
         }
 
-        .btn-primary:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 var(--black);
-        }
-
         .btn-secondary {
             background: var(--white);
             color: var(--black);
@@ -172,63 +164,39 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 7rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-container {
-            max-width: 1300px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+            border-bottom: 2px solid var(--black);
         }
 
         .hero-content {
-            max-width: 560px;
+            padding: 8rem 4rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--cream);
         }
 
         .hero-eyebrow {
-            margin-bottom: 1.25rem;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3.5rem, 7vw, 5.5rem);
-            font-weight: 700;
-            line-height: 1.0;
-            letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 em {
-            font-style: italic;
-            color: var(--coral);
-            display: inline-block;
-            animation: wiggle 3s ease-in-out infinite;
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
+        .hero h1 span {
+            display: block;
+            color: var(--coral);
         }
 
         .hero-text {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            max-width: 450px;
             line-height: 1.7;
-        }
-
-        .hero-text strong {
-            color: var(--text);
-            font-weight: 600;
         }
 
         .hero-ctas {
@@ -242,36 +210,10 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem;
-            background: var(--white);
-            border: 2px solid var(--black);
-            border-radius: 16px;
-            max-width: fit-content;
         }
-
-        .hero-proof-avatars {
-            display: flex;
-        }
-
-        .hero-proof-avatars span {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 2px solid var(--white);
-            margin-left: -10px;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-proof-avatars span:first-child { margin-left: 0; background: var(--coral-light); }
-        .hero-proof-avatars span:nth-child(2) { background: var(--mint-light); }
-        .hero-proof-avatars span:nth-child(3) { background: var(--yellow-light); }
-        .hero-proof-avatars span:nth-child(4) { background: var(--lavender-light); }
 
         .hero-proof-text {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .hero-proof-text strong {
@@ -279,51 +221,80 @@
             font-weight: 700;
         }
 
-        .hero-visual {
+        .hero-image {
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bottle-container {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        .bottle-image {
-            width: 100%;
-            border-radius: 24px;
             overflow: hidden;
-            border: 3px solid var(--black);
-            box-shadow: 8px 8px 0 var(--black);
-            transition: all 0.3s ease;
         }
 
-        .bottle-image:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0 var(--black);
-        }
-
-        .bottle-image img {
+        .hero-image img {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .floating-sticker {
+        .hero-image-overlay {
             position: absolute;
-            animation: float 4s ease-in-out infinite;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
-        .floating-sticker:nth-child(2) { top: -10px; right: -20px; animation-delay: 0.5s; }
-        .floating-sticker:nth-child(3) { bottom: 20%; left: -30px; animation-delay: 1s; }
-        .floating-sticker:nth-child(4) { bottom: -15px; right: 20%; animation-delay: 1.5s; }
+        /* Full Bleed Image Sections */
+        .full-bleed {
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--black);
+        }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-10px) rotate(3deg); }
+        .full-bleed img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .full-bleed-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 3rem;
+        }
+
+        .full-bleed-content {
+            color: white;
+            max-width: 600px;
+        }
+
+        .full-bleed-content h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .full-bleed-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Image placeholder for missing images */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--coral-light) 0%, var(--mint-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem;
         }
 
         /* Marquee */
@@ -332,8 +303,6 @@
             color: var(--white);
             padding: 1rem 0;
             overflow: hidden;
-            border-top: 2px solid var(--black);
-            border-bottom: 2px solid var(--black);
         }
 
         .marquee-inner {
@@ -346,22 +315,17 @@
             align-items: center;
             gap: 2rem;
             padding-right: 2rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             white-space: nowrap;
         }
 
-        .marquee-content span {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
         .marquee-content span::after {
-            content: '✺';
+            content: ' ✺';
             color: var(--coral);
+            margin-left: 2rem;
         }
 
         @keyframes scroll {
@@ -369,39 +333,84 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Features Section */
+        /* Split Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 2px solid var(--black);
+        }
+
+        .split-section.reverse .split-content {
+            order: 2;
+        }
+
+        .split-section.reverse .split-image {
+            order: 1;
+        }
+
+        .split-content {
+            padding: 5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-content .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .split-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .split-content p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .split-image {
+            position: relative;
+            min-height: 500px;
+        }
+
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Features Grid */
         .features {
             padding: 6rem 2rem;
             background: var(--white);
-            border-top: 2px solid var(--black);
-            position: relative;
+            border-bottom: 2px solid var(--black);
         }
 
         .features-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 4rem;
         }
 
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.1;
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
         }
 
-        .section-title em {
-            font-style: italic;
-            color: var(--coral);
-        }
-
-        .section-subtitle {
+        .section-header p {
             font-size: 1.1rem;
             color: var(--text-muted);
         }
@@ -413,8 +422,7 @@
         }
 
         .feature-card {
-            background: var(--cream);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
             border: 2px solid var(--black);
             box-shadow: 5px 5px 0 var(--black);
@@ -436,9 +444,10 @@
         }
 
         .feature-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.35rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
             margin-bottom: 0.75rem;
         }
 
@@ -452,29 +461,12 @@
         .how-it-works {
             padding: 6rem 2rem;
             background: var(--yellow);
-            border-top: 2px solid var(--black);
-            position: relative;
-        }
-
-        .how-it-works::before {
-            content: 'SO EASY';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-5deg);
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 15vw, 12rem);
-            font-weight: 700;
-            color: rgba(0, 0, 0, 0.06);
-            white-space: nowrap;
-            pointer-events: none;
+            border-bottom: 2px solid var(--black);
         }
 
         .steps-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .steps {
@@ -485,7 +477,6 @@
 
         .step {
             text-align: center;
-            position: relative;
         }
 
         .step-number {
@@ -498,16 +489,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Syne', sans-serif;
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             margin: 0 auto 1.5rem;
         }
 
         .step h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
 
@@ -517,11 +509,11 @@
             line-height: 1.6;
         }
 
-        /* Scents Section */
+        /* Scents */
         .scents {
             padding: 6rem 2rem;
             background: var(--white);
-            border-top: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
         }
 
         .scents-container {
@@ -536,25 +528,24 @@
         }
 
         .scent-card {
-            background: var(--cream);
-            border-radius: 20px;
             padding: 1.5rem 1rem;
             text-align: center;
             border: 2px solid var(--black);
+            border-radius: 16px;
             box-shadow: 4px 4px 0 var(--black);
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
         .scent-card:hover {
-            transform: translate(-2px, -2px) rotate(-1deg);
+            transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0 var(--black);
         }
 
         .scent-card:nth-child(1) { background: var(--yellow-light); }
         .scent-card:nth-child(2) { background: var(--mint-light); }
         .scent-card:nth-child(3) { background: var(--white); }
-        .scent-card:nth-child(4) { background: var(--lavender-light); }
+        .scent-card:nth-child(4) { background: #F3EEFF; }
         .scent-card:nth-child(5) { background: var(--coral-light); }
 
         .scent-icon {
@@ -564,9 +555,10 @@
         }
 
         .scent-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
             margin-bottom: 0.25rem;
         }
 
@@ -575,109 +567,60 @@
             color: var(--text-muted);
         }
 
-        /* Sustainability Section */
-        .sustainability {
-            padding: 6rem 2rem;
-            background: var(--mint);
-            border-top: 2px solid var(--black);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sustainability-container {
-            max-width: 1100px;
-            margin: 0 auto;
+        /* Stats Banner */
+        .stats-banner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 2px solid var(--black);
         }
 
-        .sustainability-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+        .stat-item {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-right: 2px solid var(--black);
         }
 
-        .sustainability-content p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            line-height: 1.7;
+        .stat-item:last-child {
+            border-right: none;
         }
 
-        .eco-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
+        .stat-item:nth-child(1) { background: var(--coral-light); }
+        .stat-item:nth-child(2) { background: var(--mint-light); }
+        .stat-item:nth-child(3) { background: var(--yellow-light); }
+        .stat-item:nth-child(4) { background: #F3EEFF; }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
-        .eco-stat {
-            background: var(--white);
-            padding: 1.25rem;
-            border-radius: 16px;
-            border: 2px solid var(--black);
-            box-shadow: 4px 4px 0 var(--black);
-        }
-
-        .eco-stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--black);
-        }
-
-        .eco-stat-label {
-            font-size: 0.8rem;
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
         }
 
-        .sustainability-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .eco-graphic {
-            width: 300px;
-            height: 300px;
-            background: var(--white);
-            border-radius: 50%;
-            border: 3px solid var(--black);
-            box-shadow: 8px 8px 0 var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            animation: spin 20s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* FAQ Section */
+        /* FAQ */
         .faq {
             padding: 6rem 2rem;
             background: var(--cream);
-            border-top: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
         }
 
         .faq-container {
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .faq-item {
             background: var(--white);
             border: 2px solid var(--black);
-            border-radius: 16px;
+            border-radius: 12px;
             margin-bottom: 1rem;
             box-shadow: 4px 4px 0 var(--black);
             overflow: hidden;
@@ -691,9 +634,10 @@
 
         .faq-question {
             padding: 1.25rem 1.5rem;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -702,11 +646,9 @@
 
         .faq-question::after {
             content: '+';
-            font-family: 'DM Sans', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--coral);
-            transition: transform 0.2s;
         }
 
         .faq-answer {
@@ -716,49 +658,24 @@
             font-size: 0.95rem;
         }
 
-        /* CTA Section */
+        /* CTA */
         .cta {
             padding: 6rem 2rem;
             background: var(--coral);
-            border-top: 2px solid var(--black);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta::before {
-            content: '✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺';
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            font-size: 2rem;
-            letter-spacing: 1rem;
-            opacity: 0.2;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
         }
 
         .cta h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 700;
+            font-size: clamp(3rem, 7vw, 5rem);
             color: var(--white);
             margin-bottom: 1rem;
-        }
-
-        .cta h2 em {
-            font-style: italic;
         }
 
         .cta p {
             font-size: 1.15rem;
             color: rgba(255,255,255,0.9);
             margin-bottom: 2rem;
-            max-width: 450px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -766,8 +683,6 @@
         .cta .btn {
             background: var(--white);
             color: var(--coral);
-            font-size: 1rem;
-            padding: 1rem 2rem;
         }
 
         .cta .btn:hover {
@@ -780,7 +695,6 @@
             background: var(--black);
             color: var(--white);
             padding: 4rem 2rem 2rem;
-            border-top: 2px solid var(--black);
         }
 
         .footer-container {
@@ -811,10 +725,10 @@
         }
 
         .footer-links h4 {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             margin-bottom: 1rem;
             color: rgba(255,255,255,0.4);
         }
@@ -825,7 +739,6 @@
             text-decoration: none;
             font-size: 0.9rem;
             margin-bottom: 0.6rem;
-            transition: color 0.2s;
         }
 
         .footer-links a:hover {
@@ -836,7 +749,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: rgba(255,255,255,0.5);
         }
 
@@ -855,7 +768,7 @@
             justify-content: center;
             color: var(--white);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             transition: all 0.2s;
         }
@@ -863,19 +776,17 @@
         .social-links a:hover {
             background: var(--coral);
             border-color: var(--coral);
-            transform: scale(1.1) rotate(-5deg);
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-container {
+            .hero {
                 grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
             }
 
             .hero-content {
-                max-width: 100%;
+                padding: 7rem 2rem 3rem;
+                text-align: center;
             }
 
             .hero-ctas {
@@ -883,16 +794,30 @@
             }
 
             .hero-proof {
-                margin: 0 auto;
+                justify-content: center;
             }
 
-            .hero-visual {
-                order: -1;
+            .hero-image {
+                height: 50vh;
+                min-height: 400px;
             }
 
-            .bottle-container {
-                max-width: 380px;
-                margin: 0 auto;
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+
+            .split-section.reverse .split-content,
+            .split-section.reverse .split-image {
+                order: unset;
+            }
+
+            .split-content {
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .split-image {
+                min-height: 400px;
             }
 
             .features-grid {
@@ -908,19 +833,17 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .sustainability-container {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .stats-banner {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .sustainability-visual {
-                order: -1;
+            .stat-item:nth-child(2) {
+                border-right: none;
             }
 
-            .eco-graphic {
-                width: 200px;
-                height: 200px;
-                font-size: 5rem;
+            .stat-item:nth-child(3),
+            .stat-item:nth-child(4) {
+                border-top: 2px solid var(--black);
             }
 
             .footer-top {
@@ -937,20 +860,25 @@
                 display: none;
             }
 
-            .hero {
-                padding: 6rem 1rem 3rem;
-            }
-
-            .floating-sticker {
-                display: none;
+            .hero-content {
+                padding: 6rem 1.5rem 2rem;
             }
 
             .scents-grid {
                 grid-template-columns: 1fr;
             }
 
-            .eco-stats {
+            .stats-banner {
                 grid-template-columns: 1fr;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 2px solid var(--black);
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
             }
 
             .footer-top {
@@ -962,10 +890,6 @@
                 gap: 1rem;
                 text-align: center;
             }
-
-            section {
-                padding: 4rem 1rem;
-            }
         }
     </style>
 </head>
@@ -974,52 +898,38 @@
     <nav>
         <a href="#" class="logo">Splooge</a>
         <div class="nav-links">
-            <a href="#features">Why Splooge</a>
+            <a href="#features">Why</a>
             <a href="#scents">Scents</a>
             <a href="#faq">FAQ</a>
-            <a href="#" class="btn btn-primary">Shop Now ✨</a>
+            <a href="#" class="btn btn-primary">Shop Now</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-eyebrow">
-                    <span class="sticker">✨ enzyme-powered clean</span>
-                </div>
-                <h1>One splooge.<br><em>That's it.</em></h1>
-                <p class="hero-text"><strong>Hyper-concentrated laundry magic</strong> that actually works. 100+ loads from one cute aluminum bottle. No plastic jugs. No measuring cup disasters. Just insanely clean clothes that smell like a dream.</p>
-                <div class="hero-ctas">
-                    <a href="#" class="btn btn-primary">Get Yours — $24</a>
-                    <a href="#features" class="btn btn-secondary">How It Works</a>
-                </div>
-                <div class="hero-proof">
-                    <div class="hero-proof-avatars">
-                        <span>🧺</span>
-                        <span>✨</span>
-                        <span>🌿</span>
-                        <span>💜</span>
-                    </div>
-                    <div class="hero-proof-text">
-                        <strong>50,000+ happy sploogers</strong>
-                        <span style="color: var(--text-muted);">4.9 ★ on everything</span>
-                    </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="sticker">Enzyme-Powered Clean</span>
+            </div>
+            <h1 class="headline">One Splooge.<br><span>That's It.</span></h1>
+            <p class="hero-text">Hyper-concentrated laundry magic that actually works. 100+ loads from one cute aluminum bottle. No plastic. No mess. Just insanely clean clothes.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-primary">Get Yours — $24</a>
+                <a href="#features" class="btn btn-secondary">How It Works</a>
+            </div>
+            <div class="hero-proof">
+                <div class="hero-proof-text">
+                    <strong>50,000+ happy sploogers</strong>
+                    <span style="color: var(--text-muted);">4.9 ★ average rating</span>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="bottle-container">
-                    <span class="sticker coral floating-sticker">6X concentrated!</span>
-                    <span class="sticker mint floating-sticker">100+ loads</span>
-                    <span class="sticker floating-sticker">plastic free 🌍</span>
-                    <div class="bottle-image">
-                        <img src="images/bottle-hero.jpg" alt="Splooge aluminum bottle with pump dispenser">
-                    </div>
-                </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/bottle-hero.jpg" alt="Splooge aluminum bottle">
+            <div class="hero-image-overlay">
+                <span class="sticker coral">6X Concentrated</span>
+                <span class="sticker mint">100+ Loads</span>
+                <span class="sticker">Plastic Free</span>
             </div>
         </div>
     </section>
@@ -1034,20 +944,8 @@
                 <span>100+ Loads</span>
                 <span>Smells Incredible</span>
                 <span>Aluminum Bottle</span>
-                <span>No Plastic Ever</span>
-                <span>6X Concentrated</span>
-                <span>Plant-Based Enzymes</span>
-                <span>100+ Loads</span>
-                <span>Smells Incredible</span>
-                <span>Aluminum Bottle</span>
             </div>
             <div class="marquee-content">
-                <span>No Plastic Ever</span>
-                <span>6X Concentrated</span>
-                <span>Plant-Based Enzymes</span>
-                <span>100+ Loads</span>
-                <span>Smells Incredible</span>
-                <span>Aluminum Bottle</span>
                 <span>No Plastic Ever</span>
                 <span>6X Concentrated</span>
                 <span>Plant-Based Enzymes</span>
@@ -1058,66 +956,76 @@
         </div>
     </div>
 
-    <!-- Features Section -->
+    <!-- Full Bleed Image 1 -->
+    <section class="full-bleed">
+        <div class="image-placeholder">
+            <div>
+                <strong>Add lifestyle image here</strong><br>
+                images/lifestyle-1.jpg<br>
+                <small>Suggested: Fresh laundry, bright natural light</small>
+            </div>
+        </div>
+        <div class="full-bleed-overlay">
+            <div class="full-bleed-content headline">
+                <h2>Clean Clothes. Clean Planet. No Compromise.</h2>
+                <p>We packed serious cleaning power into a formula so concentrated, one bottle lasts 6 months. Less shipping. Less waste. More clean.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header">
-                <h2 class="section-title">Why you'll <em>obsess</em> over it</h2>
-                <p class="section-subtitle">We packed serious cleaning power into a tiny bottle. It's giving science. It's giving sustainability. It's giving main character energy.</p>
+                <h2 class="headline">Why You'll Obsess</h2>
+                <p>It's giving science. It's giving sustainability. It's giving main character energy.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🧬</div>
                     <h3>Enzyme Magic</h3>
-                    <p>Plant-derived enzymes absolutely demolish stains at the molecular level. No harsh chemicals. No weird residue. Just pure, actual clean.</p>
+                    <p>Plant-derived enzymes demolish stains at the molecular level. No harsh chemicals. No weird residue. Just pure, actual clean.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">♻️</div>
                     <h3>Aluminum Forever</h3>
-                    <p>Infinitely recyclable. Zero microplastics in your laundry. Looks cute on your shelf. Turn it into a vase when you're done. We don't judge.</p>
+                    <p>Infinitely recyclable. Zero microplastics. Looks cute on your shelf. Turn it into a vase when you're done.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">✨</div>
                     <h3>Stupid Concentrated</h3>
-                    <p>6x more concentrated than whatever you're using rn. Less packaging. Less shipping. Less space. More clean. It's literally so easy.</p>
+                    <p>6x more concentrated than whatever you're using rn. Less packaging. Less shipping. More clean.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how">
-        <div class="steps-container">
-            <div class="section-header">
-                <h2 class="section-title">Three steps. <em>That's it.</em></h2>
-                <p class="section-subtitle">We made laundry so easy it's almost embarrassing.</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Splooge it</h3>
-                    <p>One squeeze into the drum. That satisfying sound? *chef's kiss* Resist the urge to add more. Trust.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Load it</h3>
-                    <p>Throw your clothes in. Revolutionary, we know. You've been doing this forever.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Forget it</h3>
-                    <p>Walk away. Touch grass. The enzymes handle everything. Come back smelling like that person.</p>
+    <!-- Split Section: How it Works -->
+    <section class="split-section">
+        <div class="split-content" style="background: var(--yellow);">
+            <span class="section-label">Dead Simple</span>
+            <h2 class="headline">Three Steps. That's It.</h2>
+            <p><strong>1. Splooge it</strong> — One squeeze into the drum. That satisfying sound? *chef's kiss*</p>
+            <p><strong>2. Load it</strong> — Throw your clothes in. Revolutionary, we know.</p>
+            <p><strong>3. Forget it</strong> — Walk away. Touch grass. Come back smelling like that person.</p>
+        </div>
+        <div class="split-image">
+            <div class="image-placeholder">
+                <div>
+                    <strong>Add image here</strong><br>
+                    images/lifestyle-2.jpg<br>
+                    <small>Suggested: Someone doing laundry, lifestyle shot</small>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Scents Section -->
+    <!-- Scents -->
     <section class="scents" id="scents">
         <div class="scents-container">
             <div class="section-header">
-                <h2 class="section-title">Scents that <em>actually</em> hit</h2>
-                <p class="section-subtitle">We worked with real perfumers. Not "ocean breeze" that smells like a CVS parking lot.</p>
+                <h2 class="headline">Scents That Actually Hit</h2>
+                <p>We worked with real perfumers. Not "ocean breeze" that smells like a CVS parking lot.</p>
             </div>
             <div class="scents-grid">
                 <div class="scent-card">
@@ -1143,50 +1051,54 @@
                 <div class="scent-card">
                     <span class="scent-icon">✨</span>
                     <h3>Main Character</h3>
-                    <p>Amber, sandalwood, THAT energy</p>
+                    <p>Amber, sandalwood, energy</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sustainability Section -->
-    <section class="sustainability" id="sustainability">
-        <div class="sustainability-container">
-            <div class="sustainability-content">
-                <span class="sticker" style="margin-bottom: 1rem;">no greenwashing here 🌍</span>
-                <h2>We're not here to BS you.</h2>
-                <p>Every brand says they're sustainable. Most are lying. Here's what we actually do: aluminum bottles because plastic is literally garbage. Concentrated formula so we're not shipping water across the planet like fools. 1% of revenue to ocean cleanup.</p>
-                <p>Is it perfect? No. But it's way better than those giant plastic jugs that'll outlive all of us.</p>
-                <div class="eco-stats">
-                    <div class="eco-stat">
-                        <div class="eco-stat-number">87%</div>
-                        <div class="eco-stat-label">Less plastic</div>
-                    </div>
-                    <div class="eco-stat">
-                        <div class="eco-stat-number">6x</div>
-                        <div class="eco-stat-label">Smaller footprint</div>
-                    </div>
-                    <div class="eco-stat">
-                        <div class="eco-stat-number">∞</div>
-                        <div class="eco-stat-label">Times recyclable</div>
-                    </div>
-                    <div class="eco-stat">
-                        <div class="eco-stat-number">1%</div>
-                        <div class="eco-stat-label">To ocean cleanup</div>
-                    </div>
-                </div>
+    <!-- Full Bleed Image 2 -->
+    <section class="full-bleed">
+        <div class="image-placeholder">
+            <div>
+                <strong>Add lifestyle image here</strong><br>
+                images/lifestyle-3.jpg<br>
+                <small>Suggested: Product in a beautiful laundry room or bathroom</small>
             </div>
-            <div class="sustainability-visual">
-                <div class="eco-graphic">🌍</div>
+        </div>
+        <div class="full-bleed-overlay">
+            <div class="full-bleed-content headline">
+                <h2>No Greenwashing. Just Green.</h2>
+                <p>Aluminum bottles. Concentrated formula. 1% to ocean cleanup. We actually do the work.</p>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stat-item">
+            <div class="stat-number">87%</div>
+            <div class="stat-label">Less Plastic</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">6X</div>
+            <div class="stat-label">Concentrated</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Loads Per Bottle</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Times Recyclable</div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
     <section class="faq" id="faq">
         <div class="faq-container">
             <div class="section-header">
-                <h2 class="section-title">Questions? <em>Bet.</em></h2>
+                <h2 class="headline">Questions? Bet.</h2>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Why is it called Splooge?</div>
@@ -1198,30 +1110,24 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">Works with my HE machine?</div>
-                <div class="faq-answer">Absolutely. Low-sudsing queen energy. Works with HE, standard, front-load, top-load, whatever you've got. We don't discriminate.</div>
+                <div class="faq-answer">Absolutely. Low-sudsing queen energy. Works with HE, standard, front-load, top-load, whatever you've got.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Sensitive skin?</div>
-                <div class="faq-answer">Clean Slate (unscented) is your bestie. No dyes, no fragrances, no drama. The scented ones use skin-safe fragrance oils, but if you're sensitive, go Clean Slate.</div>
+                <div class="faq-answer">Clean Slate (unscented) is your bestie. No dyes, no fragrances, no drama.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Can I recycle the bottle?</div>
-                <div class="faq-answer">Duh! Aluminum is infinitely recyclable. Rinse it, toss it. Or keep it for our refill pouches (coming soon). Or make it into art. Your call.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Do you ship internationally?</div>
-                <div class="faq-answer">US, Canada, UK for now. We're working on more, but shipping heavy stuff internationally kinda defeats the whole carbon footprint thing. Stay tuned.</div>
+                <div class="faq-answer">Duh! Aluminum is infinitely recyclable. Rinse it, toss it. Or keep it for our refill pouches (coming soon).</div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta">
-        <div class="cta-content">
-            <h2>Ready to <em>splooge?</em></h2>
-            <p>Join 50,000+ people who've made the switch to cleaner laundry and a cleaner planet.</p>
-            <a href="#" class="btn">Get Started — $24 ✨</a>
-        </div>
+        <h2 class="headline">Ready To Splooge?</h2>
+        <p>Join 50,000+ people who've made the switch to cleaner laundry and a cleaner planet.</p>
+        <a href="#" class="btn">Get Started — $24</a>
     </section>
 
     <!-- Footer -->
@@ -1230,7 +1136,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#" class="logo">Splooge</a>
-                    <p>Hyper-concentrated enzyme detergent in sustainable aluminum. A little goes a long way. A Who Gives A Crap company.</p>
+                    <p>Hyper-concentrated enzyme detergent in sustainable aluminum. A little goes a long way.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Shop</h4>
@@ -1255,38 +1161,30 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Splooge. All rights reserved. Don't be weird about the name.</p>
+                <p>&copy; 2026 Splooge. All rights reserved.</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="TikTok">TT</a>
-                    <a href="#" aria-label="Pinterest">PI</a>
+                    <a href="#">IG</a>
+                    <a href="#">TT</a>
+                    <a href="#">PI</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isOpen = answer.style.display === 'block';
-                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
-                if (!isOpen) answer.style.display = 'block';
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const a = q.nextElementSibling;
+                const open = a.style.display === 'block';
+                document.querySelectorAll('.faq-answer').forEach(x => x.style.display = 'none');
+                if (!open) a.style.display = 'block';
             });
         });
-        document.querySelectorAll('.faq-answer').forEach((answer, i) => {
-            if (i !== 0) answer.style.display = 'none';
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+        document.querySelectorAll('.faq-answer').forEach((a, i) => { if (i !== 0) a.style.display = 'none'; });
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const h = a.getAttribute('href');
+                if (h !== '#') { e.preventDefault(); document.querySelector(h)?.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
     </script>
