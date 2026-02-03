@@ -7,22 +7,23 @@
     <meta name="description" content="Hyper-concentrated, enzyme-powered laundry detergent. One splooge. That's it.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #FDF8F3;
-            --warm-white: #FFFFFF;
-            --soft-black: #1A1A1A;
-            --text-primary: #2D2D2D;
-            --text-secondary: #6B6B6B;
-            --accent: #E85D45;
-            --accent-hover: #D14D35;
-            --sage: #8FAE8B;
-            --sage-light: #E8F0E7;
-            --lavender: #B8A9C9;
-            --lavender-light: #F3EFF7;
-            --warm-gray: #F5F1ED;
-            --border: #E8E4DF;
+            --cream: #FDF6EC;
+            --white: #FFFFFF;
+            --black: #1A1A1A;
+            --coral: #FF6B5B;
+            --coral-light: #FFE5E2;
+            --yellow: #FFE55C;
+            --yellow-light: #FFF9E0;
+            --mint: #98E4C9;
+            --mint-light: #E5F9F2;
+            --lavender: #C7B8EA;
+            --lavender-light: #F3EEFF;
+            --blue: #5B9FFF;
+            --text: #1A1A1A;
+            --text-muted: #666666;
         }
 
         * {
@@ -38,15 +39,50 @@
         body {
             font-family: 'DM Sans', -apple-system, sans-serif;
             background: var(--cream);
-            color: var(--text-primary);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         ::selection {
-            background: var(--accent);
-            color: white;
+            background: var(--yellow);
+            color: var(--black);
         }
+
+        /* Fun Shapes */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob-1 { width: 300px; height: 300px; background: var(--coral-light); top: 10%; left: -5%; }
+        .blob-2 { width: 250px; height: 250px; background: var(--mint-light); top: 60%; right: -5%; }
+        .blob-3 { width: 200px; height: 200px; background: var(--yellow-light); top: 30%; right: 10%; }
+
+        /* Sticker styles */
+        .sticker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            background: var(--yellow);
+            color: var(--black);
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 100px;
+            border: 2px solid var(--black);
+            box-shadow: 3px 3px 0 var(--black);
+            transform: rotate(-2deg);
+            white-space: nowrap;
+        }
+
+        .sticker.coral { background: var(--coral); color: white; }
+        .sticker.mint { background: var(--mint); }
+        .sticker.lavender { background: var(--lavender); }
 
         /* Navigation */
         nav {
@@ -55,75 +91,82 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 3rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(253, 248, 243, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            background: var(--cream);
+            border-bottom: 2px solid var(--black);
         }
 
         .logo {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.75rem;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            color: var(--soft-black);
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--text);
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: var(--coral);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.875rem 1.75rem;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
             font-family: 'DM Sans', sans-serif;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             border-radius: 100px;
-            border: none;
+            border: 2px solid var(--black);
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.15s ease;
         }
 
         .btn-primary {
-            background: var(--soft-black);
+            background: var(--coral);
             color: white;
+            box-shadow: 4px 4px 0 var(--black);
         }
 
         .btn-primary:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1.5px solid var(--text-primary);
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 4px 4px 0 var(--black);
         }
 
         .btn-secondary:hover {
-            background: var(--text-primary);
-            color: white;
+            background: var(--yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
         }
 
         /* Hero Section */
@@ -131,86 +174,109 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 8rem 3rem 4rem;
+            padding: 7rem 2rem 4rem;
             position: relative;
             overflow: hidden;
         }
 
         .hero-container {
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+            gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
-            max-width: 580px;
+            max-width: 560px;
         }
 
         .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--sage-light);
-            color: var(--sage);
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
         }
 
         .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            font-weight: 400;
-            line-height: 1.1;
-            letter-spacing: -0.01em;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
-            color: var(--soft-black);
         }
 
         .hero h1 em {
             font-style: italic;
-            color: var(--accent);
+            color: var(--coral);
+            display: inline-block;
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
         }
 
         .hero-text {
             font-size: 1.15rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 2rem;
             line-height: 1.7;
+        }
+
+        .hero-text strong {
+            color: var(--text);
+            font-weight: 600;
         }
 
         .hero-ctas {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
-        .hero-stats {
+        .hero-proof {
             display: flex;
-            gap: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border: 2px solid var(--black);
+            border-radius: 16px;
+            max-width: fit-content;
         }
 
-        .stat-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.25rem;
-            color: var(--soft-black);
-            line-height: 1;
+        .hero-proof-avatars {
+            display: flex;
         }
 
-        .stat-label {
+        .hero-proof-avatars span {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            margin-left: -10px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-proof-avatars span:first-child { margin-left: 0; background: var(--coral-light); }
+        .hero-proof-avatars span:nth-child(2) { background: var(--mint-light); }
+        .hero-proof-avatars span:nth-child(3) { background: var(--yellow-light); }
+        .hero-proof-avatars span:nth-child(4) { background: var(--lavender-light); }
+
+        .hero-proof-text {
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
+        }
+
+        .hero-proof-text strong {
+            display: block;
+            font-weight: 700;
         }
 
         .hero-visual {
@@ -223,16 +289,21 @@
         .bottle-container {
             position: relative;
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
         }
 
         .bottle-image {
             width: 100%;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow:
-                0 25px 50px -12px rgba(0, 0, 0, 0.15),
-                0 12px 24px -8px rgba(0, 0, 0, 0.08);
+            border: 3px solid var(--black);
+            box-shadow: 8px 8px 0 var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .bottle-image:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 var(--black);
         }
 
         .bottle-image img {
@@ -241,40 +312,56 @@
             display: block;
         }
 
+        .floating-sticker {
+            position: absolute;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-sticker:nth-child(2) { top: -10px; right: -20px; animation-delay: 0.5s; }
+        .floating-sticker:nth-child(3) { bottom: 20%; left: -30px; animation-delay: 1s; }
+        .floating-sticker:nth-child(4) { bottom: -15px; right: 20%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
         /* Marquee */
         .marquee {
-            background: var(--soft-black);
-            color: white;
+            background: var(--black);
+            color: var(--white);
             padding: 1rem 0;
             overflow: hidden;
+            border-top: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
         }
 
         .marquee-inner {
             display: flex;
-            animation: scroll 25s linear infinite;
+            animation: scroll 20s linear infinite;
         }
 
         .marquee-content {
             display: flex;
             align-items: center;
-            gap: 3rem;
-            padding-right: 3rem;
-            font-size: 0.85rem;
-            font-weight: 500;
+            gap: 2rem;
+            padding-right: 2rem;
+            font-size: 0.9rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             white-space: nowrap;
         }
 
         .marquee-content span {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .marquee-content span::after {
-            content: '✦';
-            opacity: 0.5;
+            content: '✺';
+            color: var(--coral);
         }
 
         @keyframes scroll {
@@ -284,12 +371,14 @@
 
         /* Features Section */
         .features {
-            padding: 8rem 3rem;
-            background: var(--warm-white);
+            padding: 6rem 2rem;
+            background: var(--white);
+            border-top: 2px solid var(--black);
+            position: relative;
         }
 
         .features-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -299,139 +388,140 @@
             margin: 0 auto 4rem;
         }
 
-        .section-eyebrow {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 1rem;
         }
 
-        .section-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            line-height: 1.2;
-            color: var(--soft-black);
-            margin-bottom: 1rem;
+        .section-title em {
+            font-style: italic;
+            color: var(--coral);
         }
 
         .section-subtitle {
             font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            color: var(--text-muted);
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .feature-card {
             background: var(--cream);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border: 2px solid var(--black);
+            box-shadow: 5px 5px 0 var(--black);
+            transition: all 0.2s ease;
         }
 
         .feature-card:hover {
-            border-color: var(--border);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0 var(--black);
         }
+
+        .feature-card:nth-child(1) { background: var(--coral-light); }
+        .feature-card:nth-child(2) { background: var(--mint-light); }
+        .feature-card:nth-child(3) { background: var(--yellow-light); }
 
         .feature-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
-        .feature-icon.sage { background: var(--sage-light); }
-        .feature-icon.lavender { background: var(--lavender-light); }
-        .feature-icon.warm { background: #FEF3E7; }
-
         .feature-card h3 {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.35rem;
-            font-weight: 400;
+            font-weight: 700;
             margin-bottom: 0.75rem;
-            color: var(--soft-black);
         }
 
         .feature-card p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* How It Works */
         .how-it-works {
-            padding: 8rem 3rem;
-            background: var(--cream);
+            padding: 6rem 2rem;
+            background: var(--yellow);
+            border-top: 2px solid var(--black);
+            position: relative;
+        }
+
+        .how-it-works::before {
+            content: 'SO EASY';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+            pointer-events: none;
         }
 
         .steps-container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
 
         .step {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 2rem;
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--border);
-            align-items: start;
-        }
-
-        .step:last-child {
-            border-bottom: none;
+            text-align: center;
+            position: relative;
         }
 
         .step-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3.5rem;
-            color: var(--border);
-            line-height: 1;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
         }
 
-        .step:hover .step-number {
-            color: var(--accent);
-        }
-
-        .step-content h3 {
-            font-family: 'DM Serif Display', serif;
+        .step h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            font-weight: 400;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--soft-black);
         }
 
-        .step-content p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 500px;
+        .step p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         /* Scents Section */
         .scents {
-            padding: 8rem 3rem;
-            background: var(--warm-white);
+            padding: 6rem 2rem;
+            background: var(--white);
+            border-top: 2px solid var(--black);
         }
 
         .scents-container {
@@ -442,55 +532,56 @@
         .scents-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 1.25rem;
+            gap: 1rem;
         }
 
         .scent-card {
             background: var(--cream);
             border-radius: 20px;
-            padding: 2rem 1.25rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            transition: all 0.3s ease;
+            border: 2px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+            transition: all 0.2s ease;
             cursor: pointer;
-            border: 1px solid transparent;
         }
 
         .scent-card:hover {
-            border-color: var(--soft-black);
-            transform: translateY(-4px);
+            transform: translate(-2px, -2px) rotate(-1deg);
+            box-shadow: 6px 6px 0 var(--black);
         }
 
-        .scent-orb {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.08);
-        }
+        .scent-card:nth-child(1) { background: var(--yellow-light); }
+        .scent-card:nth-child(2) { background: var(--mint-light); }
+        .scent-card:nth-child(3) { background: var(--white); }
+        .scent-card:nth-child(4) { background: var(--lavender-light); }
+        .scent-card:nth-child(5) { background: var(--coral-light); }
 
-        .scent-orb.citrus { background: linear-gradient(145deg, #FFE066, #FFAB4C); }
-        .scent-orb.forest { background: linear-gradient(145deg, #8FAE8B, #5C8A56); }
-        .scent-orb.clean { background: linear-gradient(145deg, #F5F5F5, #E0E0E0); }
-        .scent-orb.lavender { background: linear-gradient(145deg, #C9B8DB, #9B7FBD); }
-        .scent-orb.amber { background: linear-gradient(145deg, #DEB887, #B8860B); }
+        .scent-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
 
         .scent-card h3 {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 0.35rem;
-            color: var(--soft-black);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
         }
 
         .scent-card p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
 
         /* Sustainability Section */
         .sustainability {
-            padding: 8rem 3rem;
-            background: var(--sage-light);
+            padding: 6rem 2rem;
+            background: var(--mint);
+            border-top: 2px solid var(--black);
+            position: relative;
+            overflow: hidden;
         }
 
         .sustainability-container {
@@ -498,48 +589,52 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .sustainability-content h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 400;
-            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: var(--soft-black);
         }
 
         .sustainability-content p {
             font-size: 1.05rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.7;
         }
 
         .eco-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-top: 2.5rem;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         .eco-stat {
-            background: white;
-            padding: 1.5rem;
+            background: var(--white);
+            padding: 1.25rem;
             border-radius: 16px;
+            border: 2px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
         }
 
         .eco-stat-number {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--sage);
+            font-weight: 700;
+            color: var(--black);
         }
 
         .eco-stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
         .sustainability-visual {
@@ -548,23 +643,30 @@
             align-items: center;
         }
 
-        .eco-image {
-            width: 100%;
-            max-width: 400px;
-            aspect-ratio: 1;
-            background: white;
+        .eco-graphic {
+            width: 300px;
+            height: 300px;
+            background: var(--white);
             border-radius: 50%;
+            border: 3px solid var(--black);
+            box-shadow: 8px 8px 0 var(--black);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* FAQ Section */
         .faq {
-            padding: 8rem 3rem;
+            padding: 6rem 2rem;
             background: var(--cream);
+            border-top: 2px solid var(--black);
         }
 
         .faq-container {
@@ -573,53 +675,78 @@
         }
 
         .faq-item {
-            border-bottom: 1px solid var(--border);
+            background: var(--white);
+            border: 2px solid var(--black);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            box-shadow: 4px 4px 0 var(--black);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .faq-item:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
         }
 
         .faq-question {
-            padding: 1.75rem 0;
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.15rem;
-            font-weight: 400;
+            padding: 1.25rem 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: color 0.2s;
-            color: var(--soft-black);
-        }
-
-        .faq-question:hover {
-            color: var(--accent);
         }
 
         .faq-question::after {
             content: '+';
             font-family: 'DM Sans', sans-serif;
             font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--text-secondary);
+            font-weight: 700;
+            color: var(--coral);
+            transition: transform 0.2s;
         }
 
         .faq-answer {
-            padding: 0 0 1.75rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1rem;
+            padding: 0 1.5rem 1.25rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         /* CTA Section */
         .cta {
-            padding: 8rem 3rem;
-            background: var(--soft-black);
+            padding: 6rem 2rem;
+            background: var(--coral);
+            border-top: 2px solid var(--black);
             text-align: center;
-            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '✺ ✺ ✺ ✺ ✺ ✺ ✺ ✺';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            font-size: 2rem;
+            letter-spacing: 1rem;
+            opacity: 0.2;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
         }
 
         .cta h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: var(--white);
             margin-bottom: 1rem;
         }
 
@@ -629,7 +756,7 @@
 
         .cta p {
             font-size: 1.15rem;
-            opacity: 0.8;
+            color: rgba(255,255,255,0.9);
             margin-bottom: 2rem;
             max-width: 450px;
             margin-left: auto;
@@ -637,57 +764,58 @@
         }
 
         .cta .btn {
-            background: white;
-            color: var(--soft-black);
+            background: var(--white);
+            color: var(--coral);
             font-size: 1rem;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
         }
 
         .cta .btn:hover {
-            background: var(--accent);
-            color: white;
+            background: var(--yellow);
+            color: var(--black);
         }
 
         /* Footer */
         footer {
-            background: var(--soft-black);
-            color: white;
-            padding: 4rem 3rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            border-top: 2px solid var(--black);
         }
 
         .footer-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .footer-top {
             display: grid;
             grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 4rem;
+            gap: 3rem;
             margin-bottom: 3rem;
             padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
 
         .footer-brand .logo {
-            color: white;
+            color: var(--white);
             margin-bottom: 1rem;
+            display: inline-block;
         }
 
         .footer-brand p {
             color: rgba(255,255,255,0.6);
             font-size: 0.9rem;
             max-width: 280px;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .footer-links h4 {
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.25rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
             color: rgba(255,255,255,0.4);
         }
 
@@ -696,12 +824,12 @@
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             font-size: 0.9rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--accent);
+            color: var(--coral);
         }
 
         .footer-bottom {
@@ -714,26 +842,28 @@
 
         .social-links {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .social-links a {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--white);
             text-decoration: none;
             font-size: 0.85rem;
+            font-weight: 700;
             transition: all 0.2s;
         }
 
         .social-links a:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--coral);
+            border-color: var(--coral);
+            transform: scale(1.1) rotate(-5deg);
         }
 
         /* Responsive */
@@ -741,7 +871,7 @@
             .hero-container {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 4rem;
+                gap: 3rem;
             }
 
             .hero-content {
@@ -752,8 +882,8 @@
                 justify-content: center;
             }
 
-            .hero-stats {
-                justify-content: center;
+            .hero-proof {
+                margin: 0 auto;
             }
 
             .hero-visual {
@@ -761,7 +891,7 @@
             }
 
             .bottle-container {
-                max-width: 400px;
+                max-width: 380px;
                 margin: 0 auto;
             }
 
@@ -769,9 +899,9 @@
                 grid-template-columns: 1fr;
             }
 
-            .step {
-                grid-template-columns: 60px 1fr;
-                gap: 1.5rem;
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .scents-grid {
@@ -780,10 +910,17 @@
 
             .sustainability-container {
                 grid-template-columns: 1fr;
+                text-align: center;
             }
 
             .sustainability-visual {
                 order: -1;
+            }
+
+            .eco-graphic {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
             }
 
             .footer-top {
@@ -793,30 +930,19 @@
 
         @media (max-width: 640px) {
             nav {
-                padding: 1rem 1.5rem;
+                padding: 1rem;
             }
 
-            .nav-links {
+            .nav-links a:not(.btn) {
                 display: none;
             }
 
             .hero {
-                padding: 6rem 1.5rem 3rem;
+                padding: 6rem 1rem 3rem;
             }
 
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-                align-items: center;
-            }
-
-            .step {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .step-number {
-                font-size: 2.5rem;
+            .floating-sticker {
+                display: none;
             }
 
             .scents-grid {
@@ -833,12 +959,12 @@
 
             .footer-bottom {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
                 text-align: center;
             }
 
             section {
-                padding: 5rem 1.5rem;
+                padding: 4rem 1rem;
             }
         }
     </style>
@@ -846,48 +972,52 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">Splooge</div>
+        <a href="#" class="logo">Splooge</a>
         <div class="nav-links">
             <a href="#features">Why Splooge</a>
             <a href="#scents">Scents</a>
-            <a href="#sustainability">Our Mission</a>
             <a href="#faq">FAQ</a>
-            <a href="#" class="btn btn-primary">Shop Now</a>
+            <a href="#" class="btn btn-primary">Shop Now ✨</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-eyebrow">
-                    <span>Enzyme-Powered Clean</span>
+                    <span class="sticker">✨ enzyme-powered clean</span>
                 </div>
                 <h1>One splooge.<br><em>That's it.</em></h1>
-                <p class="hero-text">Hyper-concentrated laundry detergent that actually works. 100+ loads from one sleek aluminum bottle. No plastic jugs. No measuring disasters. Just ridiculously clean clothes that smell incredible.</p>
+                <p class="hero-text"><strong>Hyper-concentrated laundry magic</strong> that actually works. 100+ loads from one cute aluminum bottle. No plastic jugs. No measuring cup disasters. Just insanely clean clothes that smell like a dream.</p>
                 <div class="hero-ctas">
                     <a href="#" class="btn btn-primary">Get Yours — $24</a>
-                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                    <a href="#features" class="btn btn-secondary">How It Works</a>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">6x</div>
-                        <div class="stat-label">More concentrated</div>
+                <div class="hero-proof">
+                    <div class="hero-proof-avatars">
+                        <span>🧺</span>
+                        <span>✨</span>
+                        <span>🌿</span>
+                        <span>💜</span>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Loads per bottle</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">Zero</div>
-                        <div class="stat-label">Plastic waste</div>
+                    <div class="hero-proof-text">
+                        <strong>50,000+ happy sploogers</strong>
+                        <span style="color: var(--text-muted);">4.9 ★ on everything</span>
                     </div>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="bottle-container">
+                    <span class="sticker coral floating-sticker">6X concentrated!</span>
+                    <span class="sticker mint floating-sticker">100+ loads</span>
+                    <span class="sticker floating-sticker">plastic free 🌍</span>
                     <div class="bottle-image">
-                        <img src="images/bottle-hero.jpg" alt="Splooge aluminum bottle with pump dispenser, featuring minimalist white label with coral accent, styled with linen towels and dried flowers">
+                        <img src="images/bottle-hero.jpg" alt="Splooge aluminum bottle with pump dispenser">
                     </div>
                 </div>
             </div>
@@ -898,19 +1028,31 @@
     <div class="marquee">
         <div class="marquee-inner">
             <div class="marquee-content">
-                <span>No Plastic</span>
+                <span>No Plastic Ever</span>
                 <span>6X Concentrated</span>
                 <span>Plant-Based Enzymes</span>
                 <span>100+ Loads</span>
-                <span>Smells Amazing</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+                <span>No Plastic Ever</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
                 <span>Aluminum Bottle</span>
             </div>
             <div class="marquee-content">
-                <span>No Plastic</span>
+                <span>No Plastic Ever</span>
                 <span>6X Concentrated</span>
                 <span>Plant-Based Enzymes</span>
                 <span>100+ Loads</span>
-                <span>Smells Amazing</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+                <span>No Plastic Ever</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
                 <span>Aluminum Bottle</span>
             </div>
         </div>
@@ -920,25 +1062,24 @@
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header">
-                <div class="section-eyebrow">Why Splooge?</div>
-                <h2 class="section-title">Less goop, more clean</h2>
-                <p class="section-subtitle">We packed serious cleaning power into a tiny amount. Science is cool like that.</p>
+                <h2 class="section-title">Why you'll <em>obsess</em> over it</h2>
+                <p class="section-subtitle">We packed serious cleaning power into a tiny bottle. It's giving science. It's giving sustainability. It's giving main character energy.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon sage">🧬</div>
-                    <h3>Enzyme Intelligence</h3>
-                    <p>Plant-derived enzymes break down stains at the molecular level. No harsh chemicals, no optical brighteners. Just actual, honest-to-goodness clean.</p>
+                    <div class="feature-icon">🧬</div>
+                    <h3>Enzyme Magic</h3>
+                    <p>Plant-derived enzymes absolutely demolish stains at the molecular level. No harsh chemicals. No weird residue. Just pure, actual clean.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon lavender">♻️</div>
+                    <div class="feature-icon">♻️</div>
                     <h3>Aluminum Forever</h3>
-                    <p>Our bottles are infinitely recyclable and won't leach microplastics into your laundry. Refill it, recycle it, or turn it into a vase. We don't judge.</p>
+                    <p>Infinitely recyclable. Zero microplastics in your laundry. Looks cute on your shelf. Turn it into a vase when you're done. We don't judge.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon warm">✨</div>
-                    <h3>Stupidly Concentrated</h3>
-                    <p>6x more concentrated than traditional detergents. Less packaging, less shipping weight, less space on your shelf, more clean. It's not complicated.</p>
+                    <div class="feature-icon">✨</div>
+                    <h3>Stupid Concentrated</h3>
+                    <p>6x more concentrated than whatever you're using rn. Less packaging. Less shipping. Less space. More clean. It's literally so easy.</p>
                 </div>
             </div>
         </div>
@@ -948,31 +1089,24 @@
     <section class="how-it-works" id="how">
         <div class="steps-container">
             <div class="section-header">
-                <div class="section-eyebrow">Dead Simple</div>
-                <h2 class="section-title">Three steps to clean clothes</h2>
-                <p class="section-subtitle">We made it so easy you might actually enjoy doing laundry. (Okay, that's a stretch.)</p>
+                <h2 class="section-title">Three steps. <em>That's it.</em></h2>
+                <p class="section-subtitle">We made laundry so easy it's almost embarrassing.</p>
             </div>
             <div class="steps">
                 <div class="step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Splooge it</h3>
-                        <p>One squeeze directly into the drum. That satisfying little splooge sound? Chef's kiss. Resist the urge to add more—trust the science.</p>
-                    </div>
+                    <div class="step-number">1</div>
+                    <h3>Splooge it</h3>
+                    <p>One squeeze into the drum. That satisfying sound? *chef's kiss* Resist the urge to add more. Trust.</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Load it</h3>
-                        <p>Throw your clothes in like you normally would. We're not here to reinvent laundry—just make it work better.</p>
-                    </div>
+                    <div class="step-number">2</div>
+                    <h3>Load it</h3>
+                    <p>Throw your clothes in. Revolutionary, we know. You've been doing this forever.</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Forget it</h3>
-                        <p>Start your machine and walk away. The enzymes do the hard work so you don't have to. Come back to clothes that smell incredible.</p>
-                    </div>
+                    <div class="step-number">3</div>
+                    <h3>Forget it</h3>
+                    <p>Walk away. Touch grass. The enzymes handle everything. Come back smelling like that person.</p>
                 </div>
             </div>
         </div>
@@ -982,35 +1116,34 @@
     <section class="scents" id="scents">
         <div class="scents-container">
             <div class="section-header">
-                <div class="section-eyebrow">Smell Amazing</div>
-                <h2 class="section-title">Scents you'll actually love</h2>
-                <p class="section-subtitle">We worked with real perfumers. No "ocean breeze" that smells like a gas station bathroom.</p>
+                <h2 class="section-title">Scents that <em>actually</em> hit</h2>
+                <p class="section-subtitle">We worked with real perfumers. Not "ocean breeze" that smells like a CVS parking lot.</p>
             </div>
             <div class="scents-grid">
                 <div class="scent-card">
-                    <div class="scent-orb citrus"></div>
+                    <span class="scent-icon">🍊</span>
                     <h3>Morning Person</h3>
                     <p>Citrus, bergamot, optimism</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb forest"></div>
+                    <span class="scent-icon">🌲</span>
                     <h3>Forest Bathing</h3>
-                    <p>Cedar, eucalyptus, pine</p>
+                    <p>Cedar, eucalyptus, vibes</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb clean"></div>
+                    <span class="scent-icon">💧</span>
                     <h3>Clean Slate</h3>
                     <p>Unscented, for purists</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb lavender"></div>
+                    <span class="scent-icon">🌙</span>
                     <h3>Sweet Dreams</h3>
-                    <p>Lavender, vanilla, chamomile</p>
+                    <p>Lavender, vanilla, cozy</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb amber"></div>
+                    <span class="scent-icon">✨</span>
                     <h3>Main Character</h3>
-                    <p>Amber, sandalwood, warmth</p>
+                    <p>Amber, sandalwood, THAT energy</p>
                 </div>
             </div>
         </div>
@@ -1020,18 +1153,18 @@
     <section class="sustainability" id="sustainability">
         <div class="sustainability-container">
             <div class="sustainability-content">
-                <div class="section-eyebrow">No Greenwashing</div>
-                <h2>We're not here to bullshit you.</h2>
-                <p>Every brand claims to be sustainable now. Here's what we actually do: aluminum bottles because plastic is garbage (literally). Concentrated formula so we're not shipping water across the planet. 1% of revenue to ocean cleanup.</p>
-                <p>Is it perfect? No. But it's a hell of a lot better than those giant plastic jugs that'll outlive your grandchildren.</p>
+                <span class="sticker" style="margin-bottom: 1rem;">no greenwashing here 🌍</span>
+                <h2>We're not here to BS you.</h2>
+                <p>Every brand says they're sustainable. Most are lying. Here's what we actually do: aluminum bottles because plastic is literally garbage. Concentrated formula so we're not shipping water across the planet like fools. 1% of revenue to ocean cleanup.</p>
+                <p>Is it perfect? No. But it's way better than those giant plastic jugs that'll outlive all of us.</p>
                 <div class="eco-stats">
                     <div class="eco-stat">
                         <div class="eco-stat-number">87%</div>
-                        <div class="eco-stat-label">Less plastic than traditional</div>
+                        <div class="eco-stat-label">Less plastic</div>
                     </div>
                     <div class="eco-stat">
                         <div class="eco-stat-number">6x</div>
-                        <div class="eco-stat-label">Smaller carbon footprint</div>
+                        <div class="eco-stat-label">Smaller footprint</div>
                     </div>
                     <div class="eco-stat">
                         <div class="eco-stat-number">∞</div>
@@ -1039,12 +1172,12 @@
                     </div>
                     <div class="eco-stat">
                         <div class="eco-stat-number">1%</div>
-                        <div class="eco-stat-label">Revenue to ocean cleanup</div>
+                        <div class="eco-stat-label">To ocean cleanup</div>
                     </div>
                 </div>
             </div>
             <div class="sustainability-visual">
-                <div class="eco-image">🌿</div>
+                <div class="eco-graphic">🌍</div>
             </div>
         </div>
     </section>
@@ -1053,41 +1186,42 @@
     <section class="faq" id="faq">
         <div class="faq-container">
             <div class="section-header">
-                <div class="section-eyebrow">Questions?</div>
-                <h2 class="section-title">We've got answers</h2>
+                <h2 class="section-title">Questions? <em>Bet.</em></h2>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Why is it called Splooge?</div>
-                <div class="faq-answer">Have you ever squeezed a concentrated detergent bottle? That's the sound it makes. Also, you'll never forget it. You're thinking about laundry detergent right now. We win.</div>
+                <div class="faq-answer">Squeeze the bottle. That's the sound. Also you'll literally never forget it. You're thinking about laundry detergent right now. We win.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Is one splooge really enough?</div>
-                <div class="faq-answer">Yes. We promise. Our formula is 6x more concentrated than regular detergent. One splooge (about 1 tablespoon) handles a full load. For extra dirty loads, you can do 1.5 splooges. Live dangerously.</div>
+                <div class="faq-answer">Yes bestie. 6X concentrated means one splooge (~1 tablespoon) handles a full load. For extra gross loads, do 1.5 splooges. But seriously, more is not more here.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Is it safe for HE machines?</div>
-                <div class="faq-answer">Absolutely. Splooge is low-sudsing by design, which makes it perfect for high-efficiency machines. It also works great in standard machines. We don't discriminate against appliances.</div>
+                <div class="faq-question">Works with my HE machine?</div>
+                <div class="faq-answer">Absolutely. Low-sudsing queen energy. Works with HE, standard, front-load, top-load, whatever you've got. We don't discriminate.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">What about sensitive skin?</div>
-                <div class="faq-answer">Our Clean Slate (unscented) formula is designed for sensitive skin. No dyes, no fragrances, no nonsense. The scented versions use skin-safe fragrance oils, but if you've got allergies, go Clean Slate.</div>
+                <div class="faq-question">Sensitive skin?</div>
+                <div class="faq-answer">Clean Slate (unscented) is your bestie. No dyes, no fragrances, no drama. The scented ones use skin-safe fragrance oils, but if you're sensitive, go Clean Slate.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Can I recycle the bottle?</div>
-                <div class="faq-answer">Yes! Aluminum is infinitely recyclable. Just rinse it out and toss it in your recycling bin. Or keep it for our refill pouches (coming soon). Or turn it into art. Your call.</div>
+                <div class="faq-answer">Duh! Aluminum is infinitely recyclable. Rinse it, toss it. Or keep it for our refill pouches (coming soon). Or make it into art. Your call.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Do you ship internationally?</div>
-                <div class="faq-answer">We're currently shipping to the US, Canada, and the UK. We're working on expanding, but international shipping kind of defeats the "reduce carbon footprint" thing. Stay tuned.</div>
+                <div class="faq-answer">US, Canada, UK for now. We're working on more, but shipping heavy stuff internationally kinda defeats the whole carbon footprint thing. Stay tuned.</div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta">
-        <h2>Ready to <em>splooge?</em></h2>
-        <p>Join thousands who've made the switch to cleaner laundry and a cleaner planet.</p>
-        <a href="#" class="btn">Get Started — $24</a>
+        <div class="cta-content">
+            <h2>Ready to <em>splooge?</em></h2>
+            <p>Join 50,000+ people who've made the switch to cleaner laundry and a cleaner planet.</p>
+            <a href="#" class="btn">Get Started — $24 ✨</a>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -1095,7 +1229,7 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <div class="logo">Splooge</div>
+                    <a href="#" class="logo">Splooge</a>
                     <p>Hyper-concentrated enzyme detergent in sustainable aluminum. A little goes a long way. A Who Gives A Crap company.</p>
                 </div>
                 <div class="footer-links">
@@ -1121,7 +1255,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Splooge. All rights reserved.</p>
+                <p>&copy; 2026 Splooge. All rights reserved. Don't be weird about the name.</p>
                 <div class="social-links">
                     <a href="#" aria-label="Instagram">IG</a>
                     <a href="#" aria-label="TikTok">TT</a>
