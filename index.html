@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPLOOGE | A Little Goes a Long Way</title>
-    <meta name="description" content="Hyper-concentrated, enzyme-powered laundry detergent in a sleek aluminum bottle. One splooge. That's it.">
+    <meta name="description" content="Hyper-concentrated, enzyme-powered laundry detergent. One splooge. That's it.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --splooge-blue: #2D5BFF;
-            --splooge-blue-dark: #1E45D9;
-            --cream: #FFF9F0;
-            --deep-navy: #0A1628;
-            --enzyme-green: #7FE5A0;
-            --sunset-coral: #FF6B5B;
-            --lavender-haze: #C4B5FF;
-            --text-muted: #5A6478;
+            --black: #0A0A0A;
+            --off-black: #141414;
+            --dark-gray: #1E1E1E;
+            --gray: #2A2A2A;
+            --light-gray: #888;
+            --white: #FFFFFF;
+            --cream: #F5F0E6;
+            --electric-blue: #00D4FF;
+            --neon-green: #39FF14;
+            --hot-pink: #FF2E6C;
+            --warning-yellow: #FFE135;
         }
 
         * {
@@ -31,11 +34,30 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--cream);
-            color: var(--deep-navy);
-            line-height: 1.6;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.5;
             overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        ::selection {
+            background: var(--electric-blue);
+            color: var(--black);
         }
 
         /* Navigation */
@@ -44,79 +66,86 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
-            padding: 1.25rem 2rem;
+            z-index: 100;
+            padding: 1.5rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 249, 240, 0.9);
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(10, 22, 40, 0.05);
+            border-bottom: 1px solid var(--gray);
         }
 
         .logo {
-            font-size: 1.75rem;
-            font-weight: 900;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
             letter-spacing: -0.02em;
-            color: var(--deep-navy);
+            color: var(--white);
         }
 
         .logo span {
-            color: var(--splooge-blue);
+            color: var(--electric-blue);
+            text-shadow: 0 0 20px var(--electric-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--deep-navy);
+            color: var(--light-gray);
+            font-size: 0.85rem;
             font-weight: 500;
-            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--splooge-blue);
+            color: var(--white);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.875rem 1.75rem;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 1rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             text-decoration: none;
-            border-radius: 100px;
-            transition: all 0.2s ease;
-            cursor: pointer;
             border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .btn-primary {
-            background: var(--splooge-blue);
-            color: white;
+            background: var(--electric-blue);
+            color: var(--black);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
         }
 
         .btn-primary:hover {
-            background: var(--splooge-blue-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(45, 91, 255, 0.3);
+            background: var(--white);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
         }
 
-        .btn-secondary {
+        .btn-outline {
             background: transparent;
-            color: var(--deep-navy);
-            border: 2px solid var(--deep-navy);
+            color: var(--white);
+            border: 2px solid var(--white);
         }
 
-        .btn-secondary:hover {
-            background: var(--deep-navy);
-            color: var(--cream);
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--black);
         }
 
         /* Hero Section */
@@ -124,94 +153,142 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 8rem 2rem 4rem;
+            padding: 8rem 3rem 4rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg-text {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(ellipse at center, rgba(45, 91, 255, 0.08) 0%, transparent 60%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(15rem, 30vw, 35rem);
+            font-weight: 700;
+            color: var(--dark-gray);
+            white-space: nowrap;
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
         }
 
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 700px;
         }
 
-        .hero-badge {
+        .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             padding: 0.5rem 1rem;
-            background: var(--enzyme-green);
-            color: var(--deep-navy);
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
+            background: var(--dark-gray);
+            border: 1px solid var(--gray);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--neon-green);
+            margin-bottom: 2rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
         }
 
-        .hero h1 .highlight {
-            color: var(--splooge-blue);
+        .hero h1 .line2 {
+            display: block;
+            color: var(--electric-blue);
+            text-shadow: 0 0 60px rgba(0, 212, 255, 0.5);
+            -webkit-text-stroke: 2px var(--electric-blue);
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-text {
             font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            max-width: 480px;
+            color: var(--light-gray);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-text strong {
+            color: var(--white);
         }
 
         .hero-ctas {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            margin-bottom: 4rem;
         }
 
         .hero-stats {
             display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(10, 22, 40, 0.1);
+            gap: 4rem;
         }
 
         .stat {
-            text-align: left;
+            position: relative;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray);
+        }
+
+        .stat:first-child::before {
+            display: none;
         }
 
         .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--splooge-blue);
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .hero-visual {
@@ -223,240 +300,335 @@
 
         .bottle-container {
             position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
         .bottle-glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(45, 91, 255, 0.2) 0%, transparent 70%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: -1;
+            animation: glowPulse 3s ease-in-out infinite;
         }
 
-        /* Product Bottle SVG */
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
         .bottle-svg {
-            width: 280px;
+            width: 300px;
             height: auto;
-            filter: drop-shadow(0 40px 80px rgba(10, 22, 40, 0.2));
+            filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.3));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Marquee */
+        .marquee {
+            background: var(--electric-blue);
+            color: var(--black);
+            padding: 1rem 0;
+            overflow: hidden;
+            border-top: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
+        }
+
+        .marquee-inner {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding-right: 3rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .marquee-content span {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .marquee-content span::after {
+            content: '★';
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Features Section */
         .features {
-            padding: 8rem 2rem;
-            background: white;
+            padding: 10rem 3rem;
+            background: var(--off-black);
+            position: relative;
+        }
+
+        .features::before {
+            content: 'WHY';
+            position: absolute;
+            top: 5rem;
+            right: 3rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 15rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            opacity: 0.3;
+            line-height: 1;
         }
 
         .features-container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-label {
-            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--splooge-blue);
+            letter-spacing: 0.2em;
+            color: var(--hot-pink);
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--hot-pink);
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 2px;
+            background: var(--gray);
         }
 
         .feature-card {
-            background: var(--cream);
-            padding: 2.5rem;
-            border-radius: 24px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--black);
+            padding: 3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--electric-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(10, 22, 40, 0.1);
+            background: var(--dark-gray);
         }
 
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .feature-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gray);
+            line-height: 1;
             margin-bottom: 1.5rem;
-            font-size: 1.75rem;
         }
 
-        .feature-icon.blue { background: rgba(45, 91, 255, 0.1); }
-        .feature-icon.green { background: rgba(127, 229, 160, 0.2); }
-        .feature-icon.coral { background: rgba(255, 107, 91, 0.1); }
+        .feature-card:hover .feature-number {
+            color: var(--electric-blue);
+        }
 
         .feature-card h3 {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
         .feature-card p {
-            color: var(--text-muted);
+            color: var(--light-gray);
             font-size: 1rem;
             line-height: 1.7;
         }
 
         /* How It Works */
         .how-it-works {
-            padding: 8rem 2rem;
-            background: var(--deep-navy);
-            color: white;
+            padding: 10rem 3rem;
+            background: var(--black);
+            position: relative;
         }
 
-        .how-it-works .section-label {
-            color: var(--enzyme-green);
-        }
-
-        .how-it-works .section-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+        .steps-container {
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .step {
-            text-align: center;
-            position: relative;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--gray);
+            align-items: start;
         }
 
-        .step::after {
-            content: '';
-            position: absolute;
-            top: 40px;
-            right: -1.5rem;
-            width: 3rem;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .step:last-child::after {
-            display: none;
+        .step:last-child {
+            border-bottom: none;
         }
 
         .step-number {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--splooge-blue), var(--lavender-haze));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 0 auto 1.5rem;
-        }
-
-        .step h3 {
-            font-size: 1.25rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            color: var(--electric-blue);
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
         }
 
-        .step p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
+        .step-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 500px;
+            line-height: 1.7;
         }
 
         /* Scents Section */
         .scents {
-            padding: 8rem 2rem;
-            background: var(--cream);
+            padding: 10rem 3rem;
+            background: var(--off-black);
+        }
+
+        .scents-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .scents-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .scent-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
+            background: var(--black);
+            border: 1px solid var(--gray);
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
-            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scent-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 212, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .scent-card:hover {
-            border-color: var(--splooge-blue);
-            transform: translateY(-4px);
+            border-color: var(--electric-blue);
+            transform: translateY(-5px);
         }
 
-        .scent-orb {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1.25rem;
+        .scent-card:hover::after {
+            opacity: 1;
         }
 
-        .scent-orb.citrus { background: linear-gradient(135deg, #FFD93D, #FF9F45); }
-        .scent-orb.forest { background: linear-gradient(135deg, #2D8F4E, #7FE5A0); }
-        .scent-orb.clean { background: linear-gradient(135deg, #E8E8E8, #FFFFFF); border: 1px solid #ddd; }
-        .scent-orb.lavender { background: linear-gradient(135deg, #9B7FE5, #C4B5FF); }
-        .scent-orb.amber { background: linear-gradient(135deg, #D4A574, #8B6914); }
+        .scent-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
 
         .scent-card h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
         }
 
         .scent-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--light-gray);
         }
 
-        /* Sustainability Section */
+        /* Sustainability */
         .sustainability {
-            padding: 8rem 2rem;
-            background: white;
+            padding: 10rem 3rem;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sustainability::before {
+            content: 'NO PLASTIC';
+            position: absolute;
+            bottom: 2rem;
+            left: -5%;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 700;
+            color: var(--dark-gray);
+            opacity: 0.3;
+            white-space: nowrap;
         }
 
         .sustainability-container {
@@ -466,34 +638,26 @@
             grid-template-columns: 1fr 1fr;
             gap: 6rem;
             align-items: center;
-        }
-
-        .sustainability-visual {
             position: relative;
-        }
-
-        .eco-graphic {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--enzyme-green), rgba(127, 229, 160, 0.3));
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
+            z-index: 1;
         }
 
         .sustainability-content h2 {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .sustainability-content h2 span {
+            color: var(--neon-green);
+            text-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
         }
 
         .sustainability-content p {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: var(--light-gray);
             margin-bottom: 1.5rem;
             line-height: 1.8;
         }
@@ -501,114 +665,150 @@
         .eco-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1px;
+            background: var(--gray);
+            margin-top: 3rem;
         }
 
         .eco-stat {
-            background: var(--cream);
-            padding: 1.5rem;
-            border-radius: 16px;
+            background: var(--off-black);
+            padding: 2rem;
         }
 
         .eco-stat-number {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--enzyme-green);
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon-green);
         }
 
         .eco-stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sustainability-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .eco-graphic {
+            font-size: 15rem;
+            filter: grayscale(1) contrast(1.2);
+            opacity: 0.8;
         }
 
         /* FAQ Section */
         .faq {
-            padding: 8rem 2rem;
-            background: var(--cream);
+            padding: 10rem 3rem;
+            background: var(--off-black);
         }
 
         .faq-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .faq-item {
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            overflow: hidden;
+            border-bottom: 1px solid var(--gray);
         }
 
         .faq-question {
-            padding: 1.5rem 2rem;
+            padding: 2rem 0;
+            font-size: 1.25rem;
             font-weight: 600;
-            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.2s;
+            transition: color 0.2s;
         }
 
         .faq-question:hover {
-            background: var(--cream);
+            color: var(--electric-blue);
         }
 
         .faq-question::after {
             content: '+';
+            font-family: 'Space Mono', monospace;
             font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--splooge-blue);
+            color: var(--electric-blue);
         }
 
         .faq-answer {
-            padding: 0 2rem 1.5rem;
-            color: var(--text-muted);
-            line-height: 1.7;
+            padding: 0 0 2rem;
+            color: var(--light-gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
 
         /* CTA Section */
         .cta {
-            padding: 8rem 2rem;
-            background: linear-gradient(135deg, var(--splooge-blue), #5B7FFF);
+            padding: 10rem 3rem;
+            background: var(--electric-blue);
             text-align: center;
-            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: 'SPLOOGE';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(10rem, 25vw, 25rem);
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
         }
 
         .cta h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
         }
 
         .cta p {
             font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 2.5rem;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .cta .btn {
-            background: white;
-            color: var(--splooge-blue);
-            font-size: 1.1rem;
-            padding: 1rem 2.5rem;
+            background: var(--black);
+            color: var(--electric-blue);
+            padding: 1.25rem 3rem;
+            font-size: 1rem;
         }
 
         .cta .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
         }
 
         /* Footer */
         footer {
-            background: var(--deep-navy);
-            color: white;
-            padding: 4rem 2rem 2rem;
+            background: var(--black);
+            color: var(--white);
+            padding: 5rem 3rem 2rem;
+            border-top: 1px solid var(--gray);
         }
 
         .footer-container {
@@ -620,34 +820,35 @@
             display: grid;
             grid-template-columns: 2fr repeat(3, 1fr);
             gap: 4rem;
-            margin-bottom: 3rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--gray);
         }
 
         .footer-brand .logo {
-            color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-brand p {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--light-gray);
             font-size: 0.95rem;
-            max-width: 280px;
+            max-width: 300px;
+            line-height: 1.7;
         }
 
         .footer-links h4 {
-            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.25rem;
-            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            color: var(--light-gray);
         }
 
         .footer-links a {
             display: block;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--white);
             text-decoration: none;
             font-size: 0.95rem;
             margin-bottom: 0.75rem;
@@ -655,15 +856,15 @@
         }
 
         .footer-links a:hover {
-            color: var(--enzyme-green);
+            color: var(--electric-blue);
         }
 
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            color: var(--light-gray);
         }
 
         .social-links {
@@ -672,20 +873,22 @@
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--white);
             text-decoration: none;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            font-size: 1.25rem;
         }
 
         .social-links a:hover {
-            background: var(--splooge-blue);
+            background: var(--electric-blue);
+            border-color: var(--electric-blue);
+            color: var(--black);
         }
 
         /* Responsive */
@@ -696,10 +899,6 @@
             }
 
             .hero-content {
-                max-width: 100%;
-            }
-
-            .hero-text {
                 max-width: 100%;
             }
 
@@ -715,16 +914,22 @@
                 order: -1;
             }
 
+            .hero-bg-text {
+                display: none;
+            }
+
             .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .steps {
-                grid-template-columns: 1fr;
+            .features::before {
+                display: none;
             }
 
-            .step::after {
-                display: none;
+            .step {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
             }
 
             .scents-grid {
@@ -735,6 +940,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .sustainability-visual {
+                order: -1;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr 1fr;
             }
@@ -742,7 +951,7 @@
 
         @media (max-width: 640px) {
             nav {
-                padding: 1rem;
+                padding: 1rem 1.5rem;
             }
 
             .nav-links {
@@ -750,13 +959,16 @@
             }
 
             .hero {
-                padding: 6rem 1rem 3rem;
+                padding: 7rem 1.5rem 3rem;
             }
 
             .hero-stats {
                 flex-direction: column;
-                gap: 1.5rem;
-                align-items: center;
+                gap: 2rem;
+            }
+
+            .stat::before {
+                display: none;
             }
 
             .scents-grid {
@@ -773,8 +985,12 @@
 
             .footer-bottom {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
                 text-align: center;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
             }
         }
     </style>
@@ -782,213 +998,221 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">SPL<span>O</span>OGE</div>
+        <div class="logo">SPL<span>OO</span>GE</div>
         <div class="nav-links">
-            <a href="#features">How It Works</a>
+            <a href="#features">Why</a>
             <a href="#scents">Scents</a>
-            <a href="#sustainability">Our Mission</a>
+            <a href="#sustainability">Mission</a>
             <a href="#faq">FAQ</a>
-            <a href="#" class="btn btn-primary">Shop Now</a>
+            <a href="#" class="btn btn-primary">Buy Now</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-bg-text">SPLOOGE</div>
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span>🧪</span> Enzyme-Powered Clean
-                </div>
-                <h1>One splooge.<br><span class="highlight">That's it.</span></h1>
-                <p class="hero-text">Hyper-concentrated laundry detergent that actually works. 100+ loads from one sleek aluminum bottle. No plastic jugs. No measuring disasters. Just ridiculously clean clothes.</p>
+                <div class="hero-eyebrow">Enzyme-Powered Formula</div>
+                <h1>One splooge.<br><span class="line2">That's it.</span></h1>
+                <p class="hero-text"><strong>Hyper-concentrated.</strong> Stupid effective. 100+ loads from one aluminum bottle. We're done shipping water around the planet for no reason.</p>
                 <div class="hero-ctas">
-                    <a href="#" class="btn btn-primary">Get Your Bottle — $24</a>
-                    <a href="#features" class="btn btn-secondary">See How It Works</a>
+                    <a href="#" class="btn btn-primary">Get Yours — $24</a>
+                    <a href="#features" class="btn btn-outline">Learn More</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">6x</div>
-                        <div class="stat-label">More concentrated</div>
+                        <div class="stat-number">6X</div>
+                        <div class="stat-label">Concentrated</div>
                     </div>
                     <div class="stat">
                         <div class="stat-number">100+</div>
-                        <div class="stat-label">Loads per bottle</div>
+                        <div class="stat-label">Loads</div>
                     </div>
                     <div class="stat">
                         <div class="stat-number">0</div>
-                        <div class="stat-label">Plastic waste</div>
+                        <div class="stat-label">Plastic</div>
                     </div>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="bottle-container">
                     <div class="bottle-glow"></div>
-                    <!-- Aluminum Bottle SVG -->
+                    <!-- Aluminum Bottle SVG - Dark Edition -->
                     <svg class="bottle-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- Aluminum gradient -->
-                            <linearGradient id="aluminumGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#A8B5C4"/>
-                                <stop offset="25%" style="stop-color:#E8ECF0"/>
-                                <stop offset="50%" style="stop-color:#F5F7F9"/>
-                                <stop offset="75%" style="stop-color:#D4DCE4"/>
-                                <stop offset="100%" style="stop-color:#9AA8B8"/>
+                            <linearGradient id="aluminumDark" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#1a1a1a"/>
+                                <stop offset="25%" style="stop-color:#3a3a3a"/>
+                                <stop offset="50%" style="stop-color:#4a4a4a"/>
+                                <stop offset="75%" style="stop-color:#2a2a2a"/>
+                                <stop offset="100%" style="stop-color:#1a1a1a"/>
                             </linearGradient>
-                            <!-- Cap gradient -->
-                            <linearGradient id="capGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#1E45D9"/>
-                                <stop offset="50%" style="stop-color:#2D5BFF"/>
-                                <stop offset="100%" style="stop-color:#1E45D9"/>
+                            <linearGradient id="capGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#00a0cc"/>
+                                <stop offset="50%" style="stop-color:#00D4FF"/>
+                                <stop offset="100%" style="stop-color:#00a0cc"/>
                             </linearGradient>
-                            <!-- Label gradient -->
-                            <linearGradient id="labelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FFF9F0"/>
-                                <stop offset="100%" style="stop-color:#F5EFE6"/>
+                            <linearGradient id="labelDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0a0a0a"/>
+                                <stop offset="100%" style="stop-color:#141414"/>
                             </linearGradient>
-                            <!-- Shadow -->
-                            <filter id="bottleShadow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity="0.15"/>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
                             </filter>
-                            <!-- Highlight -->
-                            <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:rgba(255,255,255,0)"/>
-                                <stop offset="40%" style="stop-color:rgba(255,255,255,0.4)"/>
-                                <stop offset="60%" style="stop-color:rgba(255,255,255,0.4)"/>
-                                <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
-                            </linearGradient>
+                            <filter id="bottleShadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#00D4FF" flood-opacity="0.2"/>
+                            </filter>
                         </defs>
 
-                        <!-- Main bottle body -->
                         <g filter="url(#bottleShadow)">
                             <!-- Bottle body -->
-                            <path d="M45 120
-                                     C45 100, 55 85, 70 80
-                                     L70 60
-                                     C70 55, 75 50, 85 50
-                                     L115 50
-                                     C125 50, 130 55, 130 60
-                                     L130 80
-                                     C145 85, 155 100, 155 120
-                                     L155 440
-                                     C155 465, 140 480, 100 480
-                                     C60 480, 45 465, 45 440
-                                     Z"
-                                  fill="url(#aluminumGradient)"/>
+                            <path d="M45 120 C45 100, 55 85, 70 80 L70 60 C70 55, 75 50, 85 50 L115 50 C125 50, 130 55, 130 60 L130 80 C145 85, 155 100, 155 120 L155 440 C155 465, 140 480, 100 480 C60 480, 45 465, 45 440 Z" fill="url(#aluminumDark)"/>
 
-                            <!-- Bottle highlight -->
-                            <path d="M70 120
-                                     C70 105, 75 95, 85 92
-                                     L85 440
-                                     C85 455, 90 460, 100 460
-                                     L100 460
-                                     C80 460, 70 450, 70 440
-                                     Z"
-                                  fill="url(#highlightGradient)" opacity="0.6"/>
+                            <!-- Edge highlight -->
+                            <path d="M55 120 C55 105, 62 95, 72 90 L72 440 C72 455, 80 465, 100 465" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
 
                             <!-- Neck ring -->
-                            <ellipse cx="100" cy="80" rx="32" ry="8" fill="#C4CDD6"/>
-                            <ellipse cx="100" cy="78" rx="30" ry="7" fill="url(#aluminumGradient)"/>
+                            <ellipse cx="100" cy="80" rx="32" ry="8" fill="#2a2a2a"/>
+                            <ellipse cx="100" cy="78" rx="30" ry="7" fill="url(#aluminumDark)"/>
 
-                            <!-- Cap -->
-                            <rect x="72" y="20" width="56" height="35" rx="8" fill="url(#capGradient)"/>
-                            <rect x="78" y="15" width="44" height="12" rx="6" fill="url(#capGradient)"/>
-                            <!-- Cap highlight -->
-                            <rect x="85" y="25" width="8" height="20" rx="4" fill="rgba(255,255,255,0.3)"/>
+                            <!-- Cap with glow -->
+                            <rect x="72" y="20" width="56" height="35" rx="8" fill="url(#capGlow)" filter="url(#glow)"/>
+                            <rect x="78" y="15" width="44" height="12" rx="6" fill="url(#capGlow)"/>
+                            <rect x="88" y="25" width="6" height="20" rx="3" fill="rgba(255,255,255,0.4)"/>
 
-                            <!-- Dispenser nozzle -->
-                            <ellipse cx="100" cy="18" rx="15" ry="5" fill="#1E45D9"/>
-                            <circle cx="100" cy="15" r="6" fill="#0A1628"/>
+                            <!-- Nozzle -->
+                            <ellipse cx="100" cy="18" rx="15" ry="5" fill="#00a0cc"/>
+                            <circle cx="100" cy="15" r="6" fill="#0a0a0a"/>
 
                             <!-- Label area -->
-                            <rect x="55" y="160" width="90" height="200" rx="8" fill="url(#labelGradient)"/>
+                            <rect x="50" y="150" width="100" height="220" rx="4" fill="url(#labelDark)" stroke="#00D4FF" stroke-width="1"/>
 
                             <!-- Label content -->
-                            <!-- Brand name -->
-                            <text x="100" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="900" fill="#0A1628">SPLOOGE</text>
+                            <text x="100" y="200" text-anchor="middle" font-family="Space Mono, monospace" font-size="20" font-weight="700" fill="#00D4FF" filter="url(#glow)">SPLOOGE</text>
 
-                            <!-- Accent circle -->
-                            <circle cx="100" cy="260" r="30" fill="none" stroke="#2D5BFF" stroke-width="2"/>
-                            <text x="100" y="267" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#2D5BFF">6X</text>
+                            <!-- Concentration badge -->
+                            <rect x="70" y="220" width="60" height="50" fill="none" stroke="#00D4FF" stroke-width="1"/>
+                            <text x="100" y="252" text-anchor="middle" font-family="Space Mono, monospace" font-size="22" font-weight="700" fill="#00D4FF">6X</text>
 
-                            <!-- Subtext -->
-                            <text x="100" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="500" fill="#5A6478">HYPER-CONCENTRATED</text>
-                            <text x="100" y="325" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="500" fill="#5A6478">ENZYME FORMULA</text>
+                            <text x="100" y="300" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="8" font-weight="600" fill="#888" letter-spacing="0.1em">HYPER-CONCENTRATED</text>
+                            <text x="100" y="315" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="8" font-weight="600" fill="#888" letter-spacing="0.1em">ENZYME FORMULA</text>
 
-                            <!-- Load count -->
-                            <text x="100" y="350" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#0A1628">100+ LOADS</text>
+                            <line x1="65" y1="335" x2="135" y2="335" stroke="#2a2a2a" stroke-width="1"/>
 
-                            <!-- Bottom detail line -->
-                            <line x1="70" y1="380" x2="130" y2="380" stroke="#E0E0E0" stroke-width="1"/>
+                            <text x="100" y="355" text-anchor="middle" font-family="Space Mono, monospace" font-size="10" font-weight="700" fill="#fff">100+ LOADS</text>
 
-                            <!-- Volume -->
-                            <text x="100" y="400" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5A6478">16 FL OZ / 473ml</text>
-
-                            <!-- Bottle bottom reflection -->
-                            <ellipse cx="100" cy="475" rx="45" ry="8" fill="rgba(0,0,0,0.05)"/>
+                            <!-- Bottom detail -->
+                            <ellipse cx="100" cy="475" rx="45" ry="8" fill="rgba(0,212,255,0.05)"/>
                         </g>
 
-                        <!-- Decorative splash elements -->
-                        <circle cx="165" cy="150" r="8" fill="#7FE5A0" opacity="0.6"/>
-                        <circle cx="30" cy="200" r="5" fill="#2D5BFF" opacity="0.4"/>
-                        <circle cx="175" cy="300" r="6" fill="#C4B5FF" opacity="0.5"/>
-                        <circle cx="20" cy="380" r="7" fill="#FF6B5B" opacity="0.4"/>
+                        <!-- Floating particles -->
+                        <circle cx="170" cy="130" r="4" fill="#00D4FF" opacity="0.6">
+                            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="25" cy="200" r="3" fill="#39FF14" opacity="0.4">
+                            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="180" cy="350" r="5" fill="#FF2E6C" opacity="0.5">
+                            <animate attributeName="opacity" values="0.5;0.15;0.5" dur="3s" repeatCount="indefinite"/>
+                        </circle>
                     </svg>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-inner">
+            <div class="marquee-content">
+                <span>No Plastic</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+                <span>No Plastic</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+            </div>
+            <div class="marquee-content">
+                <span>No Plastic</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+                <span>No Plastic</span>
+                <span>6X Concentrated</span>
+                <span>Plant-Based Enzymes</span>
+                <span>100+ Loads</span>
+                <span>Smells Incredible</span>
+                <span>Aluminum Bottle</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header">
-                <div class="section-label">Why SPLOOGE?</div>
-                <h2 class="section-title">Less is literally more</h2>
-                <p class="section-subtitle">We packed more cleaning power into less liquid. Science is cool like that.</p>
+                <div class="section-label">The Good Stuff</div>
+                <h2 class="section-title">Less goop.<br>More clean.</h2>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon blue">🧬</div>
+                    <div class="feature-number">01</div>
                     <h3>Enzyme Intelligence</h3>
-                    <p>Plant-derived enzymes break down stains at the molecular level. No harsh chemicals, no optical brighteners that coat your clothes in plastic. Just actual, honest-to-goodness clean.</p>
+                    <p>Plant-derived enzymes obliterate stains at the molecular level. No optical brighteners coating your clothes in plastic film. Just actual, real, honest-to-god clean.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon green">♻️</div>
-                    <h3>Aluminum Everything</h3>
-                    <p>Our bottles are infinitely recyclable and won't leach microplastics into your laundry. Refill it, recycle it, turn it into a tiny robot—we don't judge.</p>
+                    <div class="feature-number">02</div>
+                    <h3>Aluminum Forever</h3>
+                    <p>Infinitely recyclable. No microplastics leaching into your laundry. Looks sick on your shelf. Turn it into a vase when you're done. We literally don't care.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon coral">🎯</div>
+                    <div class="feature-number">03</div>
                     <h3>Stupid Concentrated</h3>
-                    <p>6x more concentrated than traditional detergents. That means less packaging, less shipping weight, less shelf space, and way less guilt. More clean.</p>
+                    <p>6X more concentrated than that watered-down garbage you've been using. Less packaging. Less shipping. Less space. Less guilt. More clean. It's not complicated.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="features-container">
+    <section class="how-it-works" id="how">
+        <div class="steps-container">
             <div class="section-header">
                 <div class="section-label">Dead Simple</div>
-                <h2 class="section-title" style="color: white;">Three steps to clean clothes</h2>
-                <p class="section-subtitle">We made it so easy you might actually enjoy doing laundry. (Okay, that's a stretch.)</p>
+                <h2 class="section-title">Three steps.<br>Don't overthink it.</h2>
             </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-content">
                     <h3>Splooge It</h3>
-                    <p>One squeeze directly into the drum. That satisfying little splooge sound? Chef's kiss.</p>
+                    <p>One squeeze into the drum. That satisfying little splooge sound? *Chef's kiss.* Resist the urge to add more. Trust the science.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-content">
                     <h3>Load It</h3>
-                    <p>Throw your clothes in like you normally would. We're not here to reinvent laundry.</p>
+                    <p>Throw your clothes in. We're not reinventing laundry here. You've been doing this since you moved out of your parents' place. Probably.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-content">
                     <h3>Forget It</h3>
-                    <p>Start your machine and walk away. The enzymes do the hard work so you don't have to.</p>
+                    <p>Start the machine. Walk away. Live your life. The enzymes are doing the work so you don't have to. Check back in 45 minutes smelling like a main character.</p>
                 </div>
             </div>
         </div>
@@ -996,37 +1220,36 @@
 
     <!-- Scents Section -->
     <section class="scents" id="scents">
-        <div class="features-container">
+        <div class="scents-container">
             <div class="section-header">
-                <div class="section-label">Smell Good</div>
-                <h2 class="section-title">Scents you'll actually like</h2>
-                <p class="section-subtitle">We worked with actual perfumers. No "ocean breeze" that smells like a gas station bathroom.</p>
+                <div class="section-label">Actual Good Scents</div>
+                <h2 class="section-title">Smells you won't hate.</h2>
             </div>
             <div class="scents-grid">
                 <div class="scent-card">
-                    <div class="scent-orb citrus"></div>
+                    <span class="scent-icon">🍊</span>
                     <h3>Morning Person</h3>
-                    <p>Citrus, bergamot, a hint of optimism</p>
+                    <p>Citrus. Bergamot. Optimism.</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb forest"></div>
+                    <span class="scent-icon">🌲</span>
                     <h3>Forest Bathing</h3>
-                    <p>Cedar, eucalyptus, pine (the good kind)</p>
+                    <p>Cedar. Eucalyptus. Not the car freshener kind.</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb clean"></div>
+                    <span class="scent-icon">💧</span>
                     <h3>Clean Slate</h3>
-                    <p>Unscented for purists and sensitive noses</p>
+                    <p>Unscented. For purists.</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb lavender"></div>
+                    <span class="scent-icon">🌙</span>
                     <h3>Sweet Dreams</h3>
-                    <p>Lavender, vanilla, chamomile</p>
+                    <p>Lavender. Vanilla. Chamomile.</p>
                 </div>
                 <div class="scent-card">
-                    <div class="scent-orb amber"></div>
+                    <span class="scent-icon">✨</span>
                     <h3>Main Character</h3>
-                    <p>Warm amber, sandalwood, confidence</p>
+                    <p>Amber. Sandalwood. Confidence.</p>
                 </div>
             </div>
         </div>
@@ -1035,32 +1258,32 @@
     <!-- Sustainability Section -->
     <section class="sustainability" id="sustainability">
         <div class="sustainability-container">
-            <div class="sustainability-visual">
-                <div class="eco-graphic">🌍</div>
-            </div>
             <div class="sustainability-content">
-                <div class="section-label">Our Planet, Our Problem</div>
-                <h2>We're not here to greenwash you</h2>
-                <p>Look, every brand claims to be sustainable now. Here's what we actually do: Our bottles are aluminum because we're not monsters. Our formula is concentrated so we ship less water (seriously, why is everyone shipping water?). And we donate 1% of revenue to ocean cleanup initiatives.</p>
-                <p>Is it perfect? No. But it's a hell of a lot better than those giant plastic jugs that end up in landfills or, worse, the ocean.</p>
+                <div class="section-label">No Greenwashing</div>
+                <h2>We're not here to<br><span>bullshit you.</span></h2>
+                <p>Every brand claims to be sustainable now. Most of them are lying. Here's what we actually do: aluminum bottles because plastic is garbage (literally). Concentrated formula so we're not shipping water across the planet like idiots. 1% of revenue to ocean cleanup.</p>
+                <p>Is it perfect? No. But it's a hell of a lot better than those giant plastic jugs that'll outlive your grandchildren.</p>
                 <div class="eco-stats">
                     <div class="eco-stat">
                         <div class="eco-stat-number">87%</div>
-                        <div class="eco-stat-label">Less plastic than traditional brands</div>
+                        <div class="eco-stat-label">Less plastic</div>
                     </div>
                     <div class="eco-stat">
-                        <div class="eco-stat-number">6x</div>
-                        <div class="eco-stat-label">Smaller carbon footprint per load</div>
+                        <div class="eco-stat-number">6X</div>
+                        <div class="eco-stat-label">Smaller footprint</div>
                     </div>
                     <div class="eco-stat">
                         <div class="eco-stat-number">∞</div>
-                        <div class="eco-stat-label">Times aluminum can be recycled</div>
+                        <div class="eco-stat-label">Recyclable</div>
                     </div>
                     <div class="eco-stat">
                         <div class="eco-stat-number">1%</div>
-                        <div class="eco-stat-label">Revenue to ocean cleanup</div>
+                        <div class="eco-stat-label">To ocean cleanup</div>
                     </div>
                 </div>
+            </div>
+            <div class="sustainability-visual">
+                <div class="eco-graphic">🌍</div>
             </div>
         </div>
     </section>
@@ -1069,42 +1292,43 @@
     <section class="faq" id="faq">
         <div class="faq-container">
             <div class="section-header">
-                <div class="section-label">Questions?</div>
-                <h2 class="section-title">We've got answers</h2>
-                <p class="section-subtitle">The stuff everyone asks us (and some things nobody asked but we wanted to say anyway)</p>
+                <div class="section-label">FAQ</div>
+                <h2 class="section-title">Questions.<br>Answered.</h2>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Why is it called SPLOOGE?</div>
-                <div class="faq-answer">Have you ever squeezed a concentrated detergent bottle? That's the sound it makes. Also, it's hilarious and you'll never forget it. You're welcome.</div>
+                <div class="faq-answer">Squeeze the bottle. That's the sound. Also, you'll never forget it. Marketing 101: be memorable. You're thinking about laundry detergent right now. We win.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Is one splooge really enough?</div>
-                <div class="faq-answer">Yes. We promise. Our formula is 6x more concentrated than regular detergent. One splooge (about 1 tablespoon) handles a full load. For extra dirty loads or larger machines, you can do 1.5 splooges. Live dangerously.</div>
+                <div class="faq-question">Is one splooge actually enough?</div>
+                <div class="faq-answer">Yes. We promise. 6X concentrated means one splooge (~1 tablespoon) handles a full load. For extra filthy loads, go 1.5 splooges. But seriously, resist the urge to go ham. More isn't better here.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Is it safe for HE machines?</div>
-                <div class="faq-answer">Absolutely. SPLOOGE is low-sudsing by design, which makes it perfect for high-efficiency machines. It also works great in standard machines. We don't discriminate against appliances.</div>
+                <div class="faq-question">Works with HE machines?</div>
+                <div class="faq-answer">Absolutely. Low-sudsing by design. Works with HE, standard, front-load, top-load, whatever. We don't discriminate against appliances.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">What about sensitive skin?</div>
-                <div class="faq-answer">Our Clean Slate (unscented) formula is specifically designed for sensitive skin. No dyes, no fragrances, no nonsense. The scented versions use skin-safe fragrance oils, but if you've got allergies, go Clean Slate.</div>
+                <div class="faq-question">Sensitive skin?</div>
+                <div class="faq-answer">Clean Slate (unscented) is your friend. No dyes, no fragrances, no nonsense. The scented versions use skin-safe fragrance oils, but if you've got allergies, play it safe.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Can I recycle the bottle?</div>
-                <div class="faq-answer">Yes! Aluminum is infinitely recyclable and is one of the most recycled materials on the planet. Just rinse it out and toss it in your recycling bin. Or keep it and we'll send you refill pouches (coming soon).</div>
+                <div class="faq-answer">Yes. Aluminum is infinitely recyclable. Rinse it, toss it in the bin. Or keep it for our refill pouches (coming soon). Or turn it into modern art. Your call.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Do you ship internationally?</div>
-                <div class="faq-answer">We're currently shipping to the US, Canada, and the UK. We're working on expanding to more countries, but international shipping is tricky when you're trying to minimize carbon footprint. Stay tuned.</div>
+                <div class="faq-question">International shipping?</div>
+                <div class="faq-answer">US, Canada, UK for now. We're working on more, but shipping heavy stuff internationally kind of defeats the whole "reduce carbon footprint" thing. Stay tuned.</div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta">
-        <h2>Ready to splooge?</h2>
-        <p>Join thousands of people who've made the switch to cleaner laundry and a cleaner planet.</p>
-        <a href="#" class="btn">Get Started — $24</a>
+        <div class="cta-content">
+            <h2>Ready to splooge?</h2>
+            <p>Join thousands who've ditched plastic jugs for something that actually works.</p>
+            <a href="#" class="btn">Get Started — $24</a>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -1112,8 +1336,8 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <div class="logo">SPL<span style="color: var(--splooge-blue)">O</span>OGE</div>
-                    <p>Hyper-concentrated, enzyme-powered laundry detergent in sustainable aluminum packaging. A little goes a long way.</p>
+                    <div class="logo">SPL<span style="color: var(--electric-blue)">OO</span>GE</div>
+                    <p>Hyper-concentrated enzyme detergent in sustainable aluminum. A little goes a long way. A Who Gives A Crap company.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Shop</h4>
@@ -1134,62 +1358,41 @@
                     <a href="#">FAQ</a>
                     <a href="#">Shipping</a>
                     <a href="#">Returns</a>
-                    <a href="#">Contact Us</a>
+                    <a href="#">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 SPLOOGE. A Who Gives A Crap company. All rights reserved.</p>
+                <p>&copy; 2026 SPLOOGE. All rights reserved. Don't be weird about the name.</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Instagram">📸</a>
-                    <a href="#" aria-label="TikTok">🎵</a>
-                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="TikTok">TT</a>
+                    <a href="#" aria-label="Twitter">X</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple FAQ toggle functionality
+        // FAQ toggle
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
                 const isOpen = answer.style.display === 'block';
-
-                // Close all other answers
-                document.querySelectorAll('.faq-answer').forEach(a => {
-                    a.style.display = 'none';
-                });
-                document.querySelectorAll('.faq-question').forEach(q => {
-                    q.style.setProperty('--after-content', "'+'"   );
-                });
-
-                // Toggle current answer
-                if (!isOpen) {
-                    answer.style.display = 'block';
-                }
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                if (!isOpen) answer.style.display = 'block';
             });
         });
-
-        // Hide all FAQ answers initially except first
-        document.querySelectorAll('.faq-answer').forEach((answer, index) => {
-            if (index !== 0) {
-                answer.style.display = 'none';
-            }
+        document.querySelectorAll('.faq-answer').forEach((answer, i) => {
+            if (i !== 0) answer.style.display = 'none';
         });
 
-        // Smooth scroll for navigation links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href !== '#') {
                     e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
