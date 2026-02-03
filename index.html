@@ -223,57 +223,22 @@
         .bottle-container {
             position: relative;
             width: 100%;
-            max-width: 420px;
+            max-width: 520px;
         }
 
         .bottle-image {
             width: 100%;
             border-radius: 24px;
-            background: linear-gradient(145deg, #f5f0ea 0%, #e8e0d8 50%, #d8cfc5 100%);
-            aspect-ratio: 3/4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             overflow: hidden;
             box-shadow:
-                0 25px 50px -12px rgba(0, 0, 0, 0.1),
-                0 12px 24px -8px rgba(0, 0, 0, 0.05);
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 12px 24px -8px rgba(0, 0, 0, 0.08);
         }
 
-        /* Photorealistic Bottle SVG */
-        .bottle-svg {
-            width: 55%;
+        .bottle-image img {
+            width: 100%;
             height: auto;
-            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
-        }
-
-        .bottle-badge {
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 100px;
-            height: 100px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(232, 93, 69, 0.3);
-        }
-
-        .bottle-badge span:first-child {
-            font-size: 1.75rem;
-            line-height: 1;
-        }
-
-        .bottle-badge span:last-child {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            display: block;
         }
 
         /* Marquee */
@@ -796,7 +761,7 @@
             }
 
             .bottle-container {
-                max-width: 320px;
+                max-width: 400px;
                 margin: 0 auto;
             }
 
@@ -922,146 +887,7 @@
             <div class="hero-visual">
                 <div class="bottle-container">
                     <div class="bottle-image">
-                        <!-- Photorealistic Aluminum Bottle SVG -->
-                        <svg class="bottle-svg" viewBox="0 0 180 450" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <!-- Brushed aluminum gradient -->
-                                <linearGradient id="aluminum" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#9CA3AF"/>
-                                    <stop offset="15%" style="stop-color:#D1D5DB"/>
-                                    <stop offset="30%" style="stop-color:#E5E7EB"/>
-                                    <stop offset="45%" style="stop-color:#F9FAFB"/>
-                                    <stop offset="55%" style="stop-color:#F3F4F6"/>
-                                    <stop offset="70%" style="stop-color:#D1D5DB"/>
-                                    <stop offset="85%" style="stop-color:#9CA3AF"/>
-                                    <stop offset="100%" style="stop-color:#6B7280"/>
-                                </linearGradient>
-
-                                <!-- Cap gradient -->
-                                <linearGradient id="cap" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#1F2937"/>
-                                    <stop offset="30%" style="stop-color:#374151"/>
-                                    <stop offset="50%" style="stop-color:#4B5563"/>
-                                    <stop offset="70%" style="stop-color:#374151"/>
-                                    <stop offset="100%" style="stop-color:#1F2937"/>
-                                </linearGradient>
-
-                                <!-- Label background -->
-                                <linearGradient id="label" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#FEFEFE"/>
-                                    <stop offset="100%" style="stop-color:#F5F5F5"/>
-                                </linearGradient>
-
-                                <!-- Subtle reflection -->
-                                <linearGradient id="reflection" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:rgba(255,255,255,0)"/>
-                                    <stop offset="50%" style="stop-color:rgba(255,255,255,0.4)"/>
-                                    <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
-                                </linearGradient>
-
-                                <!-- Shadow filter -->
-                                <filter id="shadow" x="-20%" y="-10%" width="140%" height="130%">
-                                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.15"/>
-                                </filter>
-
-                                <!-- Brushed texture -->
-                                <pattern id="brushed" patternUnits="userSpaceOnUse" width="2" height="100">
-                                    <line x1="0" y1="0" x2="0" y2="100" stroke="rgba(0,0,0,0.03)" stroke-width="0.5"/>
-                                    <line x1="1" y1="0" x2="1" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-                                </pattern>
-                            </defs>
-
-                            <g filter="url(#shadow)">
-                                <!-- Main bottle body -->
-                                <path d="M35 100
-                                         C35 82, 45 68, 58 62
-                                         L58 45
-                                         C58 40, 65 35, 75 35
-                                         L105 35
-                                         C115 35, 122 40, 122 45
-                                         L122 62
-                                         C135 68, 145 82, 145 100
-                                         L145 400
-                                         C145 420, 130 435, 90 435
-                                         C50 435, 35 420, 35 400 Z"
-                                      fill="url(#aluminum)"/>
-
-                                <!-- Brushed texture overlay -->
-                                <path d="M35 100
-                                         C35 82, 45 68, 58 62
-                                         L58 45
-                                         C58 40, 65 35, 75 35
-                                         L105 35
-                                         C115 35, 122 40, 122 45
-                                         L122 62
-                                         C135 68, 145 82, 145 100
-                                         L145 400
-                                         C145 420, 130 435, 90 435
-                                         C50 435, 35 420, 35 400 Z"
-                                      fill="url(#brushed)" opacity="0.5"/>
-
-                                <!-- Left edge shadow -->
-                                <path d="M35 100 C35 82, 45 68, 58 62 L58 400 C50 400, 35 395, 35 400 Z"
-                                      fill="rgba(0,0,0,0.08)"/>
-
-                                <!-- Right highlight -->
-                                <path d="M130 110 C138 115, 145 130, 145 150 L145 380 C145 395, 140 405, 130 410 L130 110"
-                                      fill="url(#reflection)" opacity="0.6"/>
-
-                                <!-- Shoulder ring -->
-                                <ellipse cx="90" cy="68" rx="34" ry="7" fill="#9CA3AF"/>
-                                <ellipse cx="90" cy="66" rx="32" ry="6" fill="url(#aluminum)"/>
-
-                                <!-- Neck -->
-                                <rect x="60" y="35" width="60" height="33" fill="url(#aluminum)"/>
-                                <rect x="60" y="35" width="60" height="33" fill="url(#brushed)" opacity="0.3"/>
-
-                                <!-- Cap base -->
-                                <rect x="55" y="12" width="70" height="28" rx="6" fill="url(#cap)"/>
-
-                                <!-- Cap top -->
-                                <rect x="62" y="5" width="56" height="14" rx="5" fill="url(#cap)"/>
-
-                                <!-- Cap highlight -->
-                                <rect x="72" y="15" width="5" height="18" rx="2.5" fill="rgba(255,255,255,0.2)"/>
-
-                                <!-- Pump nozzle -->
-                                <ellipse cx="90" cy="8" rx="18" ry="5" fill="#374151"/>
-                                <ellipse cx="90" cy="6" rx="8" ry="3" fill="#1F2937"/>
-
-                                <!-- Label area -->
-                                <rect x="42" y="130" width="96" height="200" rx="4" fill="url(#label)"/>
-                                <rect x="42" y="130" width="96" height="200" rx="4" fill="none" stroke="#E5E7EB" stroke-width="0.5"/>
-
-                                <!-- Brand name -->
-                                <text x="90" y="175" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="400" fill="#1A1A1A">Splooge</text>
-
-                                <!-- Decorative line -->
-                                <line x1="55" y1="190" x2="125" y2="190" stroke="#E85D45" stroke-width="2"/>
-
-                                <!-- Concentration info -->
-                                <text x="90" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A">6X</text>
-                                <text x="90" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="500" fill="#6B6B6B" letter-spacing="0.15em">CONCENTRATED</text>
-
-                                <!-- Product type -->
-                                <text x="90" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B6B6B" letter-spacing="0.1em">ENZYME LAUNDRY</text>
-                                <text x="90" y="283" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B6B6B" letter-spacing="0.1em">DETERGENT</text>
-
-                                <!-- Load count -->
-                                <rect x="60" y="300" width="60" height="20" rx="10" fill="#F5F5F5" stroke="#E5E7EB" stroke-width="0.5"/>
-                                <text x="90" y="314" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#1A1A1A">100+ LOADS</text>
-
-                                <!-- Bottom of label -->
-                                <text x="90" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#9CA3AF">16 FL OZ (473ml)</text>
-
-                                <!-- Bottom reflection -->
-                                <ellipse cx="90" cy="432" rx="48" ry="6" fill="rgba(0,0,0,0.03)"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="bottle-badge">
-                        <span>100+</span>
-                        <span>Loads</span>
+                        <img src="images/bottle-hero.jpg" alt="Splooge aluminum bottle with pump dispenser, featuring minimalist white label with coral accent, styled with linen towels and dried flowers">
                     </div>
                 </div>
             </div>
