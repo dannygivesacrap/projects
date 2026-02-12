@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ripple Effect — Who Gives A Crap $20M Celebration</title>
+  <link rel="stylesheet" href="../shared/header.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       THE RIPPLE EFFECT — Concept 5
+       ============================================= */
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #2EC4B6;
+      --orange: #FF9F1C;
+      --yellow: #FFBF69;
+      --navy: #011627;
+      --light-bg: #FFF9F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      background: var(--navy);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Baloo 2', cursive;
+    }
+
+    /* ---- Water Scene ---- */
+    .water-scene {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #011627 0%, #05293e 30%, #0a3d5c 55%, #1a6b6a 80%, #2EC4B6 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Subtle animated water shimmer */
+    .water-scene::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(46,196,182,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(46,196,182,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(46,196,182,0.1) 0%, transparent 40%);
+      animation: waterShimmer 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes waterShimmer {
+      0% { opacity: 0.5; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(-10px); }
+    }
+
+    /* ---- Drop Zone (pre-animation) ---- */
+    .drop-zone {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .drop-zone.hidden {
+      opacity: 0;
+      transform: translateY(-60px);
+      pointer-events: none;
+    }
+
+    .poop-emoji {
+      font-size: 80px;
+      line-height: 1;
+      animation: poopBob 2s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+      cursor: default;
+      user-select: none;
+    }
+
+    @keyframes poopBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .drop-btn {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--coral);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 40px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 6px 24px rgba(255,107,107,0.4);
+      letter-spacing: 0.5px;
+    }
+
+    .drop-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 32px rgba(255,107,107,0.55);
+      background: #ff5252;
+    }
+
+    .drop-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ---- Splash Effect ---- */
+    .splash-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    .splash {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(46,196,182,0.7);
+      opacity: 0;
+    }
+
+    .splash.active {
+      animation: splashDrop 0.8s ease-out forwards;
+    }
+
+    @keyframes splashDrop {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--sx), var(--sy)) scale(0.3);
+      }
+    }
+
+    /* Dropping poop animation */
+    .poop-dropping {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -200px);
+      font-size: 80px;
+      z-index: 11;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .poop-dropping.active {
+      opacity: 1;
+      animation: poopDrop 0.6s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+    }
+
+    @keyframes poopDrop {
+      0% {
+        transform: translate(-50%, -200px) scale(1) rotate(0deg);
+      }
+      70% {
+        transform: translate(-50%, -20px) scale(0.9) rotate(15deg);
+      }
+      100% {
+        transform: translate(-50%, 0px) scale(0) rotate(30deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---- Ripple Rings ---- */
+    .ripple-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .ripple-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 3px solid currentColor;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none;
+    }
+
+    .ripple-ring.ring-1 {
+      width: 200px;
+      height: 200px;
+      color: var(--coral);
+      border-width: 3px;
+    }
+    .ripple-ring.ring-2 {
+      width: 380px;
+      height: 380px;
+      color: var(--teal);
+      border-width: 2.5px;
+    }
+    .ripple-ring.ring-3 {
+      width: 560px;
+      height: 560px;
+      color: var(--orange);
+      border-width: 2px;
+    }
+    .ripple-ring.ring-4 {
+      width: 740px;
+      height: 740px;
+      color: var(--yellow);
+      border-width: 2px;
+    }
+    .ripple-ring.ring-5 {
+      width: 920px;
+      height: 920px;
+      color: var(--coral);
+      border-width: 1.5px;
+    }
+
+    .ripple-ring.animate {
+      animation: rippleExpand var(--duration, 2s) var(--delay, 0s) ease-out forwards;
+    }
+
+    @keyframes rippleExpand {
+      0% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      40% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* ---- Impact Stats ---- */
+    .stat {
+      position: absolute;
+      white-space: nowrap;
+      opacity: 0;
+      transform: scale(0.7) translateY(10px);
+      pointer-events: none;
+      z-index: 8;
+      text-align: center;
+      transition: none;
+    }
+
+    .stat.show {
+      animation: statReveal 0.8s ease-out forwards;
+    }
+
+    @keyframes statReveal {
+      0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(10px);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-2px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .stat-number {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+
+    .stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-top: 2px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    }
+
+    .stat-1 .stat-number { color: var(--coral); }
+    .stat-2 .stat-number { color: var(--teal); }
+    .stat-3 .stat-number { color: var(--orange); }
+    .stat-4 .stat-number { color: var(--yellow); }
+    .stat-5 .stat-number { color: var(--coral); }
+
+    /* Stat positions — distributed around the center */
+    .stat-1 { top: calc(50% - 140px); left: 50%; transform-origin: center; }
+    .stat-2 { top: calc(50% + 20px); left: calc(50% + 200px); }
+    .stat-3 { top: calc(50% - 80px); left: calc(50% - 260px); }
+    .stat-4 { top: calc(50% + 160px); left: calc(50% - 140px); }
+    .stat-5 { top: calc(50% + 120px); left: calc(50% + 120px); }
+
+    /* ---- Final Message ---- */
+    .final-message {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 12;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: none;
+    }
+
+    .final-message.show {
+      opacity: 1;
+      pointer-events: auto;
+      animation: finalFade 1.2s ease-out forwards;
+    }
+
+    @keyframes finalFade {
+      0% { opacity: 0; transform: translateX(-50%) translateY(30px); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .final-amount {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--coral);
+      text-shadow: 0 4px 24px rgba(255,107,107,0.35);
+      line-height: 1.2;
+    }
+
+    .final-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 24px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: linear-gradient(135deg, var(--teal), #36d6c6);
+      padding: 14px 44px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 28px rgba(46,196,182,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 36px rgba(46,196,182,0.55);
+    }
+
+    /* ---- Replay Button ---- */
+    .replay-btn {
+      position: absolute;
+      top: 80px;
+      right: 24px;
+      z-index: 20;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: 8px 20px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .replay-btn.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .replay-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* ---- Background Ripple Loop (post-animation) ---- */
+    .bg-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(46,196,182,0.15);
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .bg-ripple.loop {
+      animation: bgRippleLoop 6s ease-out infinite;
+    }
+
+    .bg-ripple.loop:nth-child(2) { animation-delay: 2s; }
+    .bg-ripple.loop:nth-child(3) { animation-delay: 4s; }
+
+    @keyframes bgRippleLoop {
+      0% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(20);
+      }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 900px) {
+      .ripple-ring.ring-1 { width: 140px; height: 140px; }
+      .ripple-ring.ring-2 { width: 260px; height: 260px; }
+      .ripple-ring.ring-3 { width: 380px; height: 380px; }
+      .ripple-ring.ring-4 { width: 500px; height: 500px; }
+      .ripple-ring.ring-5 { width: 620px; height: 620px; }
+
+      .stat-number { font-size: 1.5rem; }
+      .stat-label { font-size: 0.8rem; }
+
+      .stat-1 { top: calc(50% - 110px); left: 50%; }
+      .stat-2 { top: calc(50% + 10px); left: calc(50% + 140px); }
+      .stat-3 { top: calc(50% - 60px); left: calc(50% - 180px); }
+      .stat-4 { top: calc(50% + 120px); left: calc(50% - 100px); }
+      .stat-5 { top: calc(50% + 90px); left: calc(50% + 80px); }
+
+      .final-amount { font-size: 2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .poop-emoji { font-size: 60px; }
+      .drop-btn { font-size: 1.15rem; padding: 12px 32px; }
+
+      .ripple-ring.ring-1 { width: 100px; height: 100px; }
+      .ripple-ring.ring-2 { width: 190px; height: 190px; }
+      .ripple-ring.ring-3 { width: 280px; height: 280px; }
+      .ripple-ring.ring-4 { width: 370px; height: 370px; }
+      .ripple-ring.ring-5 { width: 460px; height: 460px; }
+
+      .stat-number { font-size: 1.2rem; }
+      .stat-label { font-size: 0.7rem; }
+
+      .stat-1 { top: calc(50% - 85px); left: 50%; transform: translateX(-50%); }
+      .stat-2 { top: calc(50% + 5px); left: calc(50% + 80px); }
+      .stat-3 { top: calc(50% - 40px); left: calc(50% - 130px); }
+      .stat-4 { top: calc(50% + 100px); left: calc(50% - 80px); }
+      .stat-5 { top: calc(50% + 75px); left: calc(50% + 50px); }
+
+      .final-message { bottom: 40px; }
+      .final-amount { font-size: 1.6rem; }
+      .final-sub { font-size: 0.9rem; }
+      .cta-btn { font-size: 1.05rem; padding: 12px 32px; }
+      .replay-btn { top: 70px; right: 12px; font-size: 0.8rem; padding: 6px 14px; }
+    }
+
+    @media (max-width: 380px) {
+      .stat-number { font-size: 1rem; }
+      .stat-label { font-size: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Shared WGAC Header injected by header.js -->
+
+  <main class="water-scene" id="scene">
+
+    <!-- Pre-animation: Poop + Drop Button -->
+    <div class="drop-zone" id="dropZone">
+      <div class="poop-emoji" aria-hidden="true">&#x1F4A9;</div>
+      <button class="drop-btn" id="dropBtn">Drop it!</button>
+    </div>
+
+    <!-- Dropping poop (animated on click) -->
+    <div class="poop-dropping" id="poopDrop" aria-hidden="true">&#x1F4A9;</div>
+
+    <!-- Splash particles -->
+    <div class="splash-container" id="splashContainer"></div>
+
+    <!-- Ripple Rings -->
+    <div class="ripple-container" id="rippleContainer">
+      <div class="ripple-ring ring-1" style="--duration:2.4s; --delay:0s;"></div>
+      <div class="ripple-ring ring-2" style="--duration:2.8s; --delay:0.4s;"></div>
+      <div class="ripple-ring ring-3" style="--duration:3.2s; --delay:0.8s;"></div>
+      <div class="ripple-ring ring-4" style="--duration:3.6s; --delay:1.2s;"></div>
+      <div class="ripple-ring ring-5" style="--duration:4.0s; --delay:1.6s;"></div>
+    </div>
+
+    <!-- Impact Stats -->
+    <div class="stat stat-1" id="stat1">
+      <div class="stat-number">$20,000,000 donated</div>
+    </div>
+    <div class="stat stat-2" id="stat2">
+      <div class="stat-number">3,200 toilets built &#x1F6BD;</div>
+    </div>
+    <div class="stat stat-3" id="stat3">
+      <div class="stat-number">500,000 people with clean water &#x1F4A7;</div>
+    </div>
+    <div class="stat stat-4" id="stat4">
+      <div class="stat-number">30+ countries reached &#x1F30D;</div>
+    </div>
+    <div class="stat stat-5" id="stat5">
+      <div class="stat-number">Millions of lives changed &#x2728;</div>
+    </div>
+
+    <!-- Final Message -->
+    <div class="final-message" id="finalMessage">
+      <div class="final-amount">$20,000,000 and counting...</div>
+      <div class="final-sub">Every roll makes a ripple.</div>
+      <a href="#" class="cta-btn">Join the ripple &rarr;</a>
+    </div>
+
+    <!-- Background loop ripples (post-animation) -->
+    <div class="bg-ripple" id="bgRipple1"></div>
+    <div class="bg-ripple" id="bgRipple2"></div>
+    <div class="bg-ripple" id="bgRipple3"></div>
+
+    <!-- Replay Button -->
+    <button class="replay-btn" id="replayBtn">&#x21bb; Replay</button>
+  </main>
+
+  <!-- Shared Header JS -->
+  <script src="../shared/header.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Elements
+      const dropZone = document.getElementById('dropZone');
+      const dropBtn = document.getElementById('dropBtn');
+      const poopDrop = document.getElementById('poopDrop');
+      const splashContainer = document.getElementById('splashContainer');
+      const rippleContainer = document.getElementById('rippleContainer');
+      const rings = rippleContainer.querySelectorAll('.ripple-ring');
+      const stats = [
+        document.getElementById('stat1'),
+        document.getElementById('stat2'),
+        document.getElementById('stat3'),
+        document.getElementById('stat4'),
+        document.getElementById('stat5')
+      ];
+      const finalMessage = document.getElementById('finalMessage');
+      const replayBtn = document.getElementById('replayBtn');
+      const bgRipples = [
+        document.getElementById('bgRipple1'),
+        document.getElementById('bgRipple2'),
+        document.getElementById('bgRipple3')
+      ];
+
+      let animating = false;
+
+      // --- Splash Particles ---
+      function createSplash() {
+        splashContainer.innerHTML = '';
+        const count = 14;
+        for (let i = 0; i < count; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'splash';
+          const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+          const dist = 40 + Math.random() * 70;
+          particle.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+          particle.style.setProperty('--sy', Math.sin(angle) * dist - 20 + 'px');
+          particle.style.width = (4 + Math.random() * 8) + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.left = '0px';
+          particle.style.top = '0px';
+          splashContainer.appendChild(particle);
+        }
+      }
+
+      function triggerSplash() {
+        createSplash();
+        const particles = splashContainer.querySelectorAll('.splash');
+        particles.forEach(function (p, i) {
+          setTimeout(function () {
+            p.classList.add('active');
+          }, i * 20);
+        });
+      }
+
+      // --- Main Animation Sequence ---
+      function startAnimation() {
+        if (animating) return;
+        animating = true;
+
+        // Reset everything
+        resetScene();
+
+        // Step 1: Hide the drop zone
+        dropZone.classList.add('hidden');
+
+        // Step 2: Drop the poop
+        setTimeout(function () {
+          poopDrop.classList.add('active');
+        }, 200);
+
+        // Step 3: Splash + ripples start
+        setTimeout(function () {
+          triggerSplash();
+
+          // Trigger ripple rings
+          rings.forEach(function (ring) {
+            ring.classList.add('animate');
+          });
+        }, 700);
+
+        // Step 4: Reveal stats one by one, timed to ripple expansion
+        var statDelays = [1200, 1800, 2400, 3000, 3600];
+        stats.forEach(function (stat, i) {
+          setTimeout(function () {
+            stat.classList.add('show');
+          }, statDelays[i]);
+        });
+
+        // Step 5: Final message
+        setTimeout(function () {
+          finalMessage.classList.add('show');
+        }, 4600);
+
+        // Step 6: Show replay + start background ripple loop
+        setTimeout(function () {
+          replayBtn.classList.add('show');
+          bgRipples.forEach(function (r) {
+            r.classList.add('loop');
+          });
+          animating = false;
+        }, 5400);
+      }
+
+      // --- Reset ---
+      function resetScene() {
+        // Remove all animation classes
+        dropZone.classList.remove('hidden');
+        poopDrop.classList.remove('active');
+        rings.forEach(function (r) { r.classList.remove('animate'); });
+        stats.forEach(function (s) { s.classList.remove('show'); });
+        finalMessage.classList.remove('show');
+        replayBtn.classList.remove('show');
+        bgRipples.forEach(function (r) { r.classList.remove('loop'); });
+        splashContainer.innerHTML = '';
+      }
+
+      // --- Event Listeners ---
+      dropBtn.addEventListener('click', startAnimation);
+
+      replayBtn.addEventListener('click', function () {
+        if (animating) return;
+        resetScene();
+        // Small delay so reset visually registers before re-animating
+        setTimeout(function () {
+          startAnimation();
+        }, 100);
+      });
+
+      // Keyboard accessibility
+      dropBtn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          startAnimation();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

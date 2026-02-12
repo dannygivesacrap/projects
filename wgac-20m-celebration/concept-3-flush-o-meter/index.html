@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flush-O-Meter — $20 Million Donated! | Who Gives A Crap</title>
+  <link rel="stylesheet" href="../shared/header.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Brand Tokens ===== */
+    :root {
+      --coral: #FF6B6B;
+      --teal: #2EC4B6;
+      --orange: #FF9F1C;
+      --yellow: #FFBF69;
+      --navy: #011627;
+      --light-bg: #FFF9F0;
+      --white: #FFFFFF;
+    }
+
+    /* ===== Base ===== */
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+      background: var(--light-bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Baloo 2', cursive;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      text-align: center;
+      padding: 60px 24px 40px;
+      background: linear-gradient(175deg, var(--light-bg) 0%, #fff 100%);
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .hero h1 .accent {
+      color: var(--coral);
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #555;
+      margin-bottom: 36px;
+      font-weight: 500;
+    }
+
+    /* ===== Flush Button ===== */
+    .flush-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--coral);
+      color: var(--white);
+      border: none;
+      padding: 20px 48px;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 6px 24px rgba(255, 107, 107, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flush-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 36px rgba(255, 107, 107, 0.45);
+      background: #ff5252;
+    }
+
+    .flush-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .flush-btn .flush-icon {
+      font-size: 1.4em;
+      display: inline-block;
+      transition: transform 0.4s ease;
+    }
+
+    .flush-btn.flushing .flush-icon {
+      animation: flushSpin 0.6s ease-in-out;
+    }
+
+    .flush-btn.hidden {
+      display: none;
+    }
+
+    @keyframes flushSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.3); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* ===== Main Counter Area ===== */
+    .counter-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px 60px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    /* ===== Odometer ===== */
+    .odometer-wrapper {
+      flex: 1 1 auto;
+      text-align: center;
+      position: sticky;
+      top: 100px;
+    }
+
+    .odometer-label {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .odometer-container {
+      display: inline-flex;
+      align-items: center;
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 20px 28px;
+      box-shadow: 0 12px 48px rgba(1, 22, 39, 0.25), inset 0 2px 4px rgba(255,255,255,0.05);
+      gap: 0;
+      position: relative;
+    }
+
+    .odometer-dollar {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--teal);
+      margin-right: 4px;
+      line-height: 1;
+    }
+
+    .odometer-digits {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .digit-slot {
+      width: clamp(32px, 5vw, 52px);
+      height: clamp(50px, 8vw, 78px);
+      overflow: hidden;
+      position: relative;
+      background: #0a2540;
+      border-radius: 8px;
+      margin: 0 1px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .digit-reel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .digit-reel .digit-face {
+      width: 100%;
+      height: clamp(50px, 8vw, 78px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      user-select: none;
+    }
+
+    .comma-separator {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.4);
+      margin: 0 2px;
+      line-height: 1;
+    }
+
+    /* Odometer shine line */
+    .odometer-container::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    /* ===== Progress Bar ===== */
+    .progress-bar-wrapper {
+      margin-top: 24px;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      max-width: 480px;
+      height: 12px;
+      background: rgba(1, 22, 39, 0.1);
+      border-radius: 6px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--teal), var(--orange), var(--coral));
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline-wrapper {
+      flex: 0 0 380px;
+      max-width: 380px;
+    }
+
+    .timeline-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 24px;
+      padding-left: 20px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--teal), var(--orange), var(--coral));
+      border-radius: 2px;
+      opacity: 0.25;
+    }
+
+    .timeline-line-fill {
+      position: absolute;
+      left: 6px;
+      top: 0;
+      width: 3px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--teal), var(--orange), var(--coral));
+      border-radius: 2px;
+      transition: height 0.4s ease;
+      z-index: 1;
+    }
+
+    .milestone {
+      position: relative;
+      padding: 0 0 28px 28px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .milestone.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .milestone::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--light-bg);
+      border: 3px solid #ccc;
+      z-index: 2;
+      transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+    }
+
+    .milestone.visible::before {
+      border-color: var(--teal);
+      background: var(--teal);
+      box-shadow: 0 0 12px rgba(46, 196, 182, 0.4);
+    }
+
+    .milestone .ms-amount {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--coral);
+      display: block;
+    }
+
+    .milestone .ms-text {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    .milestone .ms-emoji {
+      font-size: 1.3rem;
+      margin-left: 4px;
+    }
+
+    /* ===== Celebration Overlay ===== */
+    .celebration {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(1, 22, 39, 0.85);
+      backdrop-filter: blur(6px);
+      animation: fadeInOverlay 0.6s ease;
+    }
+
+    .celebration.active {
+      display: flex;
+    }
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .celebration-content {
+      text-align: center;
+      padding: 48px 32px;
+      max-width: 600px;
+      animation: celebPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+    }
+
+    @keyframes celebPop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .celebration h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .celebration h2 .big-number {
+      display: block;
+      font-size: 1.4em;
+      color: var(--teal);
+      text-shadow: 0 0 40px rgba(46, 196, 182, 0.5);
+    }
+
+    .celebration p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .celebration .celeb-emoji {
+      font-size: 3rem;
+      margin-top: 20px;
+      display: block;
+      animation: bounce 0.8s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-12px); }
+    }
+
+    .celebration .restart-btn {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 36px;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(46, 196, 182, 0.3);
+    }
+
+    .celebration .restart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(46, 196, 182, 0.45);
+    }
+
+    /* ===== Confetti ===== */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .confetti-piece.active {
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg) scale(0.5);
+      }
+    }
+
+    /* ===== Footer Note ===== */
+    .footer-note {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .footer-note a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 860px) {
+      .counter-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .odometer-wrapper {
+        position: relative;
+        top: 0;
+      }
+
+      .timeline-wrapper {
+        flex: 1 1 auto;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero {
+        padding: 40px 16px 28px;
+      }
+
+      .flush-btn {
+        padding: 16px 36px;
+      }
+
+      .odometer-container {
+        padding: 14px 16px;
+        border-radius: 14px;
+      }
+
+      .digit-slot {
+        width: 28px;
+        height: 44px;
+        border-radius: 5px;
+      }
+
+      .digit-reel .digit-face {
+        height: 44px;
+        font-size: 1.4rem;
+      }
+
+      .odometer-dollar {
+        font-size: 1.8rem;
+      }
+
+      .comma-separator {
+        font-size: 1.4rem;
+      }
+
+      .milestone {
+        padding-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>The <span class="accent">Flush-O-Meter</span></h1>
+    <p class="subtitle">Watch 20 years of giving add up to something incredible.</p>
+    <button class="flush-btn" id="flushBtn" onclick="startCounter()">
+      <span class="flush-icon">🚽</span> Flush to Start!
+    </button>
+  </section>
+
+  <!-- Counter + Timeline -->
+  <section class="counter-section">
+
+    <!-- Odometer Side -->
+    <div class="odometer-wrapper">
+      <div class="odometer-label">Total Donated</div>
+      <div class="odometer-container" id="odometer">
+        <span class="odometer-dollar">$</span>
+        <div class="odometer-digits" id="odometerDigits">
+          <!-- Digits: 00,000,000 — 8 digits with commas -->
+          <!-- Digit slots and commas will be built by JS -->
+        </div>
+      </div>
+      <div class="progress-bar-wrapper">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">$0 of $20,000,000</div>
+      </div>
+    </div>
+
+    <!-- Timeline Side -->
+    <div class="timeline-wrapper">
+      <div class="timeline-title">Milestones Along the Way</div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-line-fill" id="timelineFill"></div>
+        <!-- Milestones injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Celebration Overlay -->
+  <div class="celebration" id="celebration">
+    <div class="celebration-content">
+      <h2>
+        We did it!
+        <span class="big-number">$20,000,000</span>
+      </h2>
+      <p>Twenty million dollars donated to bring clean water and sanitation to communities around the world. All because people chose to give a crap.</p>
+      <span class="celeb-emoji">🎉🚽💧</span>
+      <button class="restart-btn" onclick="resetCounter()">Flush Again!</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-note">
+    20 years of flushing for good. <a href="#">Learn more about our impact &rarr;</a>
+  </div>
+
+  <!-- Shared Header JS -->
+  <script src="../shared/header.js"></script>
+
+  <script>
+    /* ===================================================================
+       Flush-O-Meter — Odometer counter with milestones
+       =================================================================== */
+
+    const TARGET = 20000000;
+    const TOTAL_DIGITS = 8; // 20,000,000 has 8 digits
+
+    // Milestones data
+    const MILESTONES = [
+      { value: 1000000,  label: 'First toilet project funded',                emoji: '🚽' },
+      { value: 2000000,  label: '10,000 people gained clean water access',    emoji: '💧' },
+      { value: 5000000,  label: 'Clean water for 100,000 people',             emoji: '🌊' },
+      { value: 8000000,  label: 'Sanitation programs in 20 countries',        emoji: '🌍' },
+      { value: 10000000, label: 'Half a million lives improved',              emoji: '✨' },
+      { value: 13000000, label: 'Emergency relief across 3 continents',       emoji: '🆘' },
+      { value: 15000000, label: '1 million people with better sanitation',    emoji: '🎉' },
+      { value: 18000000, label: 'Largest annual donation yet',                emoji: '📈' },
+      { value: 20000000, label: "And we're just getting started...",          emoji: '💪' },
+    ];
+
+    let currentValue = 0;
+    let animationRunning = false;
+    let animationId = null;
+
+    // ===== Build the odometer digit slots =====
+    function buildOdometer() {
+      const container = document.getElementById('odometerDigits');
+      container.innerHTML = '';
+
+      // Pattern: DD,DDD,DDD  (positions 0-7, commas after index 1 and 4)
+      for (let i = 0; i < TOTAL_DIGITS; i++) {
+        // Insert comma separators
+        if (i === 2 || i === 5) {
+          const comma = document.createElement('span');
+          comma.className = 'comma-separator';
+          comma.textContent = ',';
+          container.appendChild(comma);
+        }
+
+        const slot = document.createElement('div');
+        slot.className = 'digit-slot';
+
+        const reel = document.createElement('div');
+        reel.className = 'digit-reel';
+        reel.id = `reel-${i}`;
+
+        // Create 10 faces (0-9)
+        for (let d = 0; d < 10; d++) {
+          const face = document.createElement('div');
+          face.className = 'digit-face';
+          face.textContent = d;
+          reel.appendChild(face);
+        }
+
+        slot.appendChild(reel);
+        container.appendChild(slot);
+      }
+    }
+
+    // ===== Set the odometer to display a number =====
+    function setOdometerValue(val) {
+      const str = String(Math.min(val, TARGET)).padStart(TOTAL_DIGITS, '0');
+      const digitHeight = document.querySelector('.digit-face')
+        ? document.querySelector('.digit-face').offsetHeight
+        : 78;
+
+      for (let i = 0; i < TOTAL_DIGITS; i++) {
+        const digit = parseInt(str[i], 10);
+        const reel = document.getElementById(`reel-${i}`);
+        if (reel) {
+          reel.style.transform = `translateY(-${digit * digitHeight}px)`;
+        }
+      }
+    }
+
+    // ===== Build milestone DOM =====
+    function buildMilestones() {
+      const timeline = document.getElementById('timeline');
+      // Keep the fill line
+      const fillLine = document.getElementById('timelineFill');
+
+      // Remove old milestones (keep fill line)
+      timeline.querySelectorAll('.milestone').forEach(m => m.remove());
+
+      MILESTONES.forEach((ms, idx) => {
+        const el = document.createElement('div');
+        el.className = 'milestone';
+        el.id = `ms-${idx}`;
+        el.innerHTML = `
+          <span class="ms-amount">$${ms.value.toLocaleString()}</span>
+          <span class="ms-text">${ms.label} <span class="ms-emoji">${ms.emoji}</span></span>
+        `;
+        timeline.appendChild(el);
+      });
+    }
+
+    // ===== Update milestones visibility =====
+    function updateMilestones(val) {
+      let lastVisibleIdx = -1;
+      MILESTONES.forEach((ms, idx) => {
+        const el = document.getElementById(`ms-${idx}`);
+        if (val >= ms.value) {
+          if (!el.classList.contains('visible')) {
+            // Stagger the animation slightly
+            setTimeout(() => el.classList.add('visible'), idx * 40);
+          }
+          lastVisibleIdx = idx;
+        }
+      });
+
+      // Update the fill line
+      const fillPct = lastVisibleIdx >= 0
+        ? ((lastVisibleIdx + 1) / MILESTONES.length) * 100
+        : 0;
+      document.getElementById('timelineFill').style.height = fillPct + '%';
+    }
+
+    // ===== Update progress bar =====
+    function updateProgress(val) {
+      const pct = Math.min((val / TARGET) * 100, 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent =
+        '$' + Math.floor(val).toLocaleString() + ' of $20,000,000';
+    }
+
+    // ===== Easing: accelerating curve =====
+    // We use a custom easing that starts slow and accelerates
+    function easeInQuad(t) {
+      return t * t;
+    }
+
+    function easeInCubic(t) {
+      return t * t * t;
+    }
+
+    // Blend: slow start, fast finish
+    function customEase(t) {
+      // Starts very slow, then accelerates dramatically
+      if (t < 0.3) {
+        // Slow phase
+        return easeInCubic(t / 0.3) * 0.05;
+      } else {
+        // Accelerating phase
+        const t2 = (t - 0.3) / 0.7;
+        return 0.05 + easeInQuad(t2) * 0.95;
+      }
+    }
+
+    // ===== Counter animation =====
+    function startCounter() {
+      if (animationRunning) return;
+      animationRunning = true;
+
+      const btn = document.getElementById('flushBtn');
+      btn.classList.add('flushing');
+
+      // Hide button after animation
+      setTimeout(() => {
+        btn.classList.add('hidden');
+      }, 700);
+
+      const duration = 8000; // 8 seconds total
+      const startTime = performance.now();
+
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = customEase(progress);
+        currentValue = Math.floor(easedProgress * TARGET);
+
+        setOdometerValue(currentValue);
+        updateMilestones(currentValue);
+        updateProgress(currentValue);
+
+        if (progress < 1) {
+          animationId = requestAnimationFrame(tick);
+        } else {
+          // Ensure we land exactly on target
+          currentValue = TARGET;
+          setOdometerValue(TARGET);
+          updateMilestones(TARGET);
+          updateProgress(TARGET);
+          animationRunning = false;
+
+          // Trigger celebration
+          setTimeout(showCelebration, 600);
+        }
+      }
+
+      animationId = requestAnimationFrame(tick);
+    }
+
+    // ===== Celebration =====
+    function showCelebration() {
+      document.getElementById('celebration').classList.add('active');
+      launchConfetti();
+    }
+
+    function hideCelebration() {
+      document.getElementById('celebration').classList.remove('active');
+    }
+
+    // ===== Confetti =====
+    function launchConfetti() {
+      const colors = ['#FF6B6B', '#2EC4B6', '#FF9F1C', '#FFBF69', '#011627', '#fff'];
+      const shapes = ['square', 'circle'];
+      const count = 80;
+
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const size = 6 + Math.random() * 10;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 1.5;
+        const fallDuration = 2 + Math.random() * 3;
+
+        piece.style.cssText = `
+          left: ${left}%;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          border-radius: ${shape === 'circle' ? '50%' : '2px'};
+        `;
+
+        document.body.appendChild(piece);
+
+        // Trigger animation
+        setTimeout(() => {
+          piece.classList.add('active');
+          piece.style.animationDuration = fallDuration + 's';
+          piece.style.animationDelay = '0s';
+        }, delay * 1000);
+
+        // Clean up
+        setTimeout(() => {
+          piece.remove();
+        }, (delay + fallDuration + 0.5) * 1000);
+      }
+    }
+
+    // ===== Reset =====
+    function resetCounter() {
+      hideCelebration();
+      currentValue = 0;
+
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+      animationRunning = false;
+
+      setOdometerValue(0);
+      updateProgress(0);
+
+      // Reset milestones
+      document.querySelectorAll('.milestone').forEach(m => m.classList.remove('visible'));
+      document.getElementById('timelineFill').style.height = '0%';
+
+      // Show the flush button again
+      const btn = document.getElementById('flushBtn');
+      btn.classList.remove('hidden', 'flushing');
+    }
+
+    // ===== Init =====
+    function init() {
+      buildOdometer();
+      buildMilestones();
+      setOdometerValue(0);
+      updateProgress(0);
+    }
+
+    // Run on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>

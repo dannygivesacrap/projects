@@ -1,0 +1,134 @@
+/* WGAC Shared Header Styles */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap');
+
+/* Brand Colors */
+:root {
+  --wgac-coral: #FF6B6B;
+  --wgac-teal: #2EC4B6;
+  --wgac-orange: #FF9F1C;
+  --wgac-yellow: #FFBF69;
+  --wgac-navy: #011627;
+  --wgac-white: #FFFFFF;
+  --wgac-light-bg: #FFF9F0;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--wgac-navy);
+  background: var(--wgac-light-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Baloo 2', cursive;
+}
+
+/* Header */
+.wgac-header {
+  background: var(--wgac-white);
+  box-shadow: 0 2px 8px rgba(1, 22, 39, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.wgac-accent-bar {
+  height: 4px;
+  background: var(--wgac-teal);
+}
+
+.wgac-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+}
+
+/* Logo */
+.wgac-logo {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--wgac-navy);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.wgac-logo span {
+  display: block;
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--wgac-teal);
+  letter-spacing: 0.5px;
+}
+
+/* Nav */
+.wgac-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.wgac-nav a {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--wgac-navy);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.wgac-nav a:hover {
+  color: var(--wgac-teal);
+}
+
+/* Utility links */
+.wgac-utility {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wgac-utility a {
+  font-size: 0.85rem;
+  color: var(--wgac-navy);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.wgac-utility a:hover {
+  opacity: 1;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .wgac-header-inner {
+    padding: 10px 16px;
+  }
+
+  .wgac-nav {
+    gap: 16px;
+  }
+
+  .wgac-nav a {
+    font-size: 0.85rem;
+  }
+
+  .wgac-utility {
+    display: none;
+  }
+
+  .wgac-logo {
+    font-size: 1.1rem;
+  }
+}
