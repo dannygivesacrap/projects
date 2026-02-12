@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The World's Longest Receipt — $20M of Good | Who Gives A Crap</title>
+  <link rel="stylesheet" href="../shared/header.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       THE WORLD'S LONGEST RECEIPT
+       $20,000,000.00 of impact, itemized.
+       ============================================= */
+
+    /* --- Page-level styles --- */
+    body {
+      background: var(--wgac-light-bg);
+      min-height: 100vh;
+    }
+
+    .page-title-area {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .page-title-area h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--wgac-navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .page-title-area h1 em {
+      font-style: normal;
+      color: var(--wgac-coral);
+    }
+
+    .page-title-area p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.15rem;
+      color: var(--wgac-navy);
+      opacity: 0.7;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* --- Receipt wrapper --- */
+    .receipt-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 0 16px 80px;
+    }
+
+    .receipt {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      filter: drop-shadow(0 4px 24px rgba(1, 22, 39, 0.12));
+    }
+
+    /* --- Zigzag torn edges --- */
+    .receipt-edge-top,
+    .receipt-edge-bottom {
+      display: block;
+      width: 100%;
+      height: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .receipt-edge-top svg,
+    .receipt-edge-bottom svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- Receipt paper body --- */
+    .receipt-paper {
+      background: #FEFCF6;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(0, 0, 0, 0.018) 28px,
+          rgba(0, 0, 0, 0.018) 29px
+        );
+      padding: 28px 24px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #1a1a1a;
+      position: relative;
+    }
+
+    /* Subtle paper texture overlay */
+    .receipt-paper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .receipt-paper > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- Receipt header section --- */
+    .receipt-store-name {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .receipt-store-tagline {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      opacity: 0.6;
+      margin-bottom: 14px;
+    }
+
+    .receipt-info {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.65;
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+
+    /* --- Separators --- */
+    .sep {
+      text-align: center;
+      letter-spacing: 1px;
+      opacity: 0.45;
+      margin: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .sep-double {
+      border: none;
+      margin: 14px 0;
+      opacity: 0.35;
+    }
+
+    .sep-double::before,
+    .sep-double::after {
+      content: '========================================';
+      display: block;
+      letter-spacing: 1px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    /* --- Section headers --- */
+    .section-header {
+      text-align: center;
+      font-weight: bold;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin: 4px 0 10px;
+      text-transform: uppercase;
+    }
+
+    /* --- Line items --- */
+    .line-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px;
+      margin: 5px 0;
+      line-height: 1.55;
+    }
+
+    .line-item .item-desc {
+      flex-shrink: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+
+    .line-item .dots {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 0.3;
+      min-width: 12px;
+      letter-spacing: 1px;
+      line-height: 1.55;
+    }
+
+    .line-item .item-price {
+      white-space: nowrap;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    /* Quantity sublines */
+    .line-qty {
+      font-size: 11.5px;
+      opacity: 0.55;
+      margin: -2px 0 4px 12px;
+    }
+
+    /* --- Subtotal rows --- */
+    .subtotal-row {
+      margin: 14px 0;
+      padding: 6px 0;
+    }
+
+    .subtotal-row .line-item {
+      font-weight: bold;
+    }
+
+    /* --- Totals section --- */
+    .totals-section {
+      margin-top: 8px;
+    }
+
+    .total-grand {
+      font-size: 17px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .total-grand .item-price {
+      font-size: 17px;
+    }
+
+    /* --- Thank you stamp --- */
+    .thank-you-stamp {
+      text-align: center;
+      margin: 36px auto 10px;
+      position: relative;
+    }
+
+    .thank-you-stamp .stamp {
+      display: inline-block;
+      font-family: 'Baloo 2', cursive;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--wgac-coral);
+      border: 5px solid var(--wgac-coral);
+      border-radius: 14px;
+      padding: 6px 28px;
+      transform: rotate(-6deg);
+      opacity: 0.8;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      position: relative;
+    }
+
+    .thank-you-stamp .stamp::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2px solid var(--wgac-coral);
+      border-radius: 16px;
+      opacity: 0.35;
+    }
+
+    .stamp-subtext {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      text-align: center;
+      opacity: 0.5;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* --- Barcode area --- */
+    .barcode-area {
+      text-align: center;
+      margin: 24px 0 8px;
+    }
+
+    .barcode {
+      display: inline-flex;
+      gap: 1.5px;
+      align-items: flex-end;
+      height: 46px;
+    }
+
+    .barcode span {
+      display: inline-block;
+      background: #1a1a1a;
+      width: 2px;
+      border-radius: 0.5px;
+    }
+
+    .barcode-number {
+      font-size: 11px;
+      letter-spacing: 4px;
+      opacity: 0.45;
+      margin-top: 5px;
+    }
+
+    /* --- Receipt footer note --- */
+    .receipt-footer-note {
+      text-align: center;
+      font-size: 10.5px;
+      opacity: 0.45;
+      line-height: 1.7;
+      margin-top: 16px;
+      padding-top: 8px;
+    }
+
+    /* --- Category emoji markers --- */
+    .cat-icon {
+      display: inline;
+      font-style: normal;
+    }
+
+    /* --- Highlight for priceless line --- */
+    .priceless-line .item-desc {
+      font-style: italic;
+    }
+
+    .priceless-line .item-price {
+      font-weight: bold;
+      color: var(--wgac-coral);
+    }
+
+    /* --- Page footer --- */
+    .page-footer {
+      text-align: center;
+      padding: 0 20px 60px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--wgac-navy);
+      opacity: 0.55;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .page-footer a {
+      color: var(--wgac-teal);
+      text-decoration: underline;
+      text-decoration-color: var(--wgac-teal);
+      text-underline-offset: 2px;
+    }
+
+    /* --- Scroll progress --- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--wgac-coral), var(--wgac-orange), var(--wgac-yellow));
+      z-index: 1100;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* --- Fade-in animation for line items --- */
+    .line-item,
+    .section-header,
+    .subtotal-row,
+    .sep,
+    .sep-double,
+    .line-qty {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .line-item.visible,
+    .section-header.visible,
+    .subtotal-row.visible,
+    .sep.visible,
+    .sep-double.visible,
+    .line-qty.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Restore correct reduced opacity for specific elements once visible */
+    .sep.visible { opacity: 0.45; }
+    .line-qty.visible { opacity: 0.55; }
+
+    /* --- Responsive --- */
+    @media (max-width: 520px) {
+      .page-title-area {
+        padding: 40px 16px 28px;
+      }
+
+      .page-title-area h1 {
+        font-size: 2rem;
+      }
+
+      .page-title-area p {
+        font-size: 1rem;
+      }
+
+      .receipt-paper {
+        padding: 22px 14px;
+        font-size: 12px;
+      }
+
+      .receipt-store-name {
+        font-size: 16px;
+      }
+
+      .total-grand,
+      .total-grand .item-price {
+        font-size: 14.5px;
+      }
+
+      .thank-you-stamp .stamp {
+        font-size: 36px;
+        padding: 4px 18px;
+      }
+
+      .receipt {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .receipt-paper {
+        padding: 18px 10px;
+        font-size: 11px;
+      }
+
+      .line-item .dots {
+        min-width: 6px;
+      }
+
+      .thank-you-stamp .stamp {
+        font-size: 28px;
+        padding: 4px 12px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Shared WGAC header injected by header.js -->
+
+  <!-- Page title -->
+  <div class="page-title-area">
+    <h1>The World's Longest <em>Receipt</em></h1>
+    <p>$20 million in donations, itemized line by line. Scroll down &mdash; it's a long one.</p>
+  </div>
+
+  <!-- The Receipt -->
+  <div class="receipt-wrapper">
+    <div class="receipt">
+
+      <!-- Torn top edge -->
+      <div class="receipt-edge-top">
+        <svg viewBox="0 0 460 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,18 L0,12 L5,6 L10,12 L15,6 L20,12 L25,6 L30,12 L35,6 L40,12 L45,6 L50,12 L55,6 L60,12 L65,6 L70,12 L75,6 L80,12 L85,6 L90,12 L95,6 L100,12 L105,6 L110,12 L115,6 L120,12 L125,6 L130,12 L135,6 L140,12 L145,6 L150,12 L155,6 L160,12 L165,6 L170,12 L175,6 L180,12 L185,6 L190,12 L195,6 L200,12 L205,6 L210,12 L215,6 L220,12 L225,6 L230,12 L235,6 L240,12 L245,6 L250,12 L255,6 L260,12 L265,6 L270,12 L275,6 L280,12 L285,6 L290,12 L295,6 L300,12 L305,6 L310,12 L315,6 L320,12 L325,6 L330,12 L335,6 L340,12 L345,6 L350,12 L355,6 L360,12 L365,6 L370,12 L375,6 L380,12 L385,6 L390,12 L395,6 L400,12 L405,6 L410,12 L415,6 L420,12 L425,6 L430,12 L435,6 L440,12 L445,6 L450,12 L455,6 L460,12 L460,18 Z" fill="#FEFCF6"/>
+        </svg>
+      </div>
+
+      <!-- Receipt paper content -->
+      <div class="receipt-paper" id="receiptPaper">
+
+        <!-- Store header -->
+        <div class="receipt-store-name">WHO GIVES A CRAP</div>
+        <div class="receipt-store-tagline">GOOD SH*T SINCE 2012</div>
+        <div class="receipt-info">
+          Level 1, 435 Johnston St<br>
+          Abbotsford VIC 3067, Australia<br>
+          ABN: 88 159 732 987<br><br>
+          DATE: 2024-12-31 23:59:59<br>
+          RECEIPT #: WGAC-20M-001<br>
+          CASHIER: The Internet
+        </div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="receipt-info" style="font-size: 11px; letter-spacing: 1px;">
+          ** 20 MILLION DOLLAR IMPACT REPORT **
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 1: SANITATION INFRASTRUCTURE ====== -->
+        <div class="section-header">SANITATION INFRASTRUCTURE</div>
+
+        <div class="line-item">
+          <span class="item-desc">Toilets built</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$2,400,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 3,200 units @ $750.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Latrine upgrades</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$680,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1,360 upgrades @ $500.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Sewer system connections</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$520,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 260 connections @ $2,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Septic tank installations</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$390,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 780 tanks @ $500.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">School toilet blocks</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$610,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 122 blocks @ $5,000.00/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: INFRASTRUCTURE</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$4,600,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 2: CLEAN WATER ACCESS ====== -->
+        <div class="section-header">CLEAN WATER ACCESS</div>
+
+        <div class="line-item">
+          <span class="item-desc">Community wells drilled</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$1,800,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 600 wells @ $3,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Water purification systems</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$950,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 475 systems @ $2,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Rainwater harvesting tanks</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$620,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1,240 tanks @ $500.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Pipeline extensions</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$730,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 146 km @ $5,000.00/km</div>
+
+        <div class="line-item">
+          <span class="item-desc">Water testing kits</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$200,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 40,000 kits @ $5.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Borehole rehabilitation</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$400,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 200 boreholes @ $2,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Spring water protection</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$300,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 150 springs @ $2,000.00/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: CLEAN WATER</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$5,000,000.00</span>
+          </div>
+        </div>
+
+        <div class="receipt-info" style="font-size: 11px; margin: 6px 0;">
+          ** 500,000+ PEOPLE NOW HAVE CLEAN WATER **
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 3: HYGIENE SUPPLIES ====== -->
+        <div class="section-header">HYGIENE SUPPLIES DISTRIBUTED</div>
+
+        <div class="line-item">
+          <span class="item-desc">Toilet paper rolls</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$540,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1,080,000 rolls @ $0.50/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Soap bars</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$320,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 640,000 bars @ $0.50/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Menstrual hygiene kits</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$410,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 82,000 kits @ $5.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Hand sanitizer (bulk)</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$180,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 36,000 liters @ $5.00/L</div>
+
+        <div class="line-item">
+          <span class="item-desc">Handwashing stations</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$250,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 2,500 stations @ $100.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Cleaning supply kits</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$100,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 10,000 kits @ $10.00/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: HYGIENE SUPPLIES</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$1,800,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 4: EDUCATION ====== -->
+        <div class="section-header">SANITATION EDUCATION</div>
+
+        <div class="line-item">
+          <span class="item-desc">Community health workshops</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$860,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 4,300 workshops @ $200.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">School hygiene programs</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$720,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1,200 schools @ $600.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Printed education materials</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$340,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 680,000 booklets @ $0.50/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Teacher training programs</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$480,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 2,400 teachers @ $200.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Radio awareness campaigns</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$320,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 640 broadcast slots @ $500.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Community health workers</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$480,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 480 workers x 12 months @ $83.33/mo</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: EDUCATION</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$3,200,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 5: EMERGENCY RELIEF ====== -->
+        <div class="section-header">EMERGENCY SANITATION RELIEF</div>
+
+        <div class="line-item">
+          <span class="item-desc">Disaster response kits</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$480,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 24,000 kits @ $20.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Portable toilet deployment</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$360,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1,200 units @ $300.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Flood recovery sanitation</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$420,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 42 community projects @ $10,000/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Emergency water trucking</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$310,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 3,100 deliveries @ $100.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Cholera prevention kits</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$250,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 50,000 kits @ $5.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Refugee camp sanitation</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$180,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 18 camp setups @ $10,000.00/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: EMERGENCY</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$2,000,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 6: COMMUNITY PARTNERSHIPS ====== -->
+        <div class="section-header">COMMUNITY PARTNERSHIPS</div>
+
+        <div class="line-item">
+          <span class="item-desc">Local NGO grants</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$650,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 130 grants @ $5,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Women-led cooperatives</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$380,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 76 cooperatives @ $5,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Microfinance for sanitation</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$420,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 2,100 loans @ $200.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Government co-funding</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$350,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 35 joint projects @ $10,000/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Partner capacity building</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$200,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 100 training programs @ $2,000/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: PARTNERSHIPS</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$2,000,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 7: RESEARCH & ADVOCACY ====== -->
+        <div class="section-header">RESEARCH &amp; ADVOCACY</div>
+
+        <div class="line-item">
+          <span class="item-desc">Sanitation impact studies</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$280,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 28 studies @ $10,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Policy advocacy campaigns</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$220,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 44 campaigns @ $5,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Open-source data platform</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$180,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 1 platform (ongoing)</div>
+
+        <div class="line-item">
+          <span class="item-desc">University partnerships</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$150,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 15 partnerships @ $10,000/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Documentary production</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$90,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 3 films @ $30,000.00/ea</div>
+
+        <div class="line-item">
+          <span class="item-desc">Annual impact reports</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$80,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 10 years @ $8,000.00/yr</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: RESEARCH</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$1,000,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== SECTION 8: THE LITTLE THINGS ====== -->
+        <div class="section-header">THE LITTLE THINGS THAT MATTER</div>
+
+        <div class="line-item">
+          <span class="item-desc">Kids who didn't miss school</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$120,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 24,000 school days saved</div>
+
+        <div class="line-item">
+          <span class="item-desc">Moms who walked less far</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$90,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 180,000 hours saved per year</div>
+
+        <div class="line-item">
+          <span class="item-desc">Dignity restored</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$80,000.00</span>
+        </div>
+        <div class="line-qty">QTY: immeasurable (but we tried)</div>
+
+        <div class="line-item">
+          <span class="item-desc">Bad poop jokes funded</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$50,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 12,500 jokes @ $4.00/ea (worth it)</div>
+
+        <div class="line-item">
+          <span class="item-desc">Community pride events</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$60,000.00</span>
+        </div>
+        <div class="line-qty">QTY: 300 celebrations @ $200.00/ea</div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="subtotal-row">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL: LITTLE THINGS</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$400,000.00</span>
+          </div>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== PRICELESS LINE ====== -->
+        <div class="line-item priceless-line">
+          <span class="item-desc">Lives changed: priceless</span>
+          <span class="dots">......................................................</span>
+          <span class="item-price">$0.00</span>
+        </div>
+
+        <div class="sep-double"></div>
+
+        <!-- ====== GRAND TOTALS ====== -->
+        <div class="totals-section">
+          <div class="line-item">
+            <span class="item-desc">SUBTOTAL</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$20,000,000.00</span>
+          </div>
+
+          <div class="line-item">
+            <span class="item-desc">TAX</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$0.00</span>
+          </div>
+          <div class="line-qty">(giving is tax-free*)</div>
+
+          <div class="line-item">
+            <span class="item-desc">DISCOUNT (kindness)</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">-$0.00</span>
+          </div>
+
+          <div class="sep">= = = = = = = = = = = = = = = = = =</div>
+
+          <div class="line-item total-grand">
+            <span class="item-desc">TOTAL</span>
+            <span class="dots">......................................................</span>
+            <span class="item-price">$20,000,000.00</span>
+          </div>
+
+          <div class="sep">= = = = = = = = = = = = = = = = = =</div>
+        </div>
+
+        <div class="receipt-info" style="margin-top: 12px; font-size: 11px;">
+          PAYMENT METHOD: Generosity<br>
+          CARD: **** **** **** LOVE<br>
+          AUTH CODE: THANKYOU<br>
+          APPROVED
+        </div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="receipt-info" style="font-size: 11px; line-height: 1.9;">
+          ITEMS SOLD: 2,927,956<br>
+          LIVES IMPACTED: 500,000+<br>
+          COUNTRIES REACHED: 46<br>
+          SMILES GENERATED: countless
+        </div>
+
+        <!-- Thank you stamp -->
+        <div class="thank-you-stamp">
+          <div class="stamp">THANK YOU</div>
+        </div>
+
+        <div class="stamp-subtext">
+          Every wipe makes a difference.<br>
+          Thanks for giving a crap.
+        </div>
+
+        <!-- Barcode -->
+        <div class="barcode-area">
+          <div class="barcode" id="barcode"></div>
+          <div class="barcode-number">2 0 0 0 0 0 0 0 0 0</div>
+        </div>
+
+        <div class="sep">- - - - - - - - - - - - - - - - - -</div>
+
+        <div class="receipt-footer-note">
+          * Not actual tax advice. But seriously,<br>
+          thank you for being part of this.<br><br>
+          CUSTOMER COPY &mdash; PLEASE RETAIN<br>
+          RETURNS ACCEPTED: never (the<br>
+          impact is already out there)<br><br>
+          Visit: whogivesacrap.org<br>
+          #WhoGivesACrap #20MillionStrong
+        </div>
+
+      </div>
+      <!-- end .receipt-paper -->
+
+      <!-- Torn bottom edge -->
+      <div class="receipt-edge-bottom">
+        <svg viewBox="0 0 460 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,0 L0,6 L5,12 L10,6 L15,12 L20,6 L25,12 L30,6 L35,12 L40,6 L45,12 L50,6 L55,12 L60,6 L65,12 L70,6 L75,12 L80,6 L85,12 L90,6 L95,12 L100,6 L105,12 L110,6 L115,12 L120,6 L125,12 L130,6 L135,12 L140,6 L145,12 L150,6 L155,12 L160,6 L165,12 L170,6 L175,12 L180,6 L185,12 L190,6 L195,12 L200,6 L205,12 L210,6 L215,12 L220,6 L225,12 L230,6 L235,12 L240,6 L245,12 L250,6 L255,12 L260,6 L265,12 L270,6 L275,12 L280,6 L285,12 L290,6 L295,12 L300,6 L305,12 L310,6 L315,12 L320,6 L325,12 L330,6 L335,12 L340,6 L345,12 L350,6 L355,12 L360,6 L365,12 L370,6 L375,12 L380,6 L385,12 L390,6 L395,12 L400,6 L405,12 L410,6 L415,12 L420,6 L425,12 L430,6 L435,12 L440,6 L445,12 L450,6 L455,12 L460,6 L460,0 Z" fill="#FEFCF6"/>
+        </svg>
+      </div>
+
+    </div>
+    <!-- end .receipt -->
+  </div>
+  <!-- end .receipt-wrapper -->
+
+  <!-- Page footer -->
+  <div class="page-footer">
+    * Not actual tax advice. But seriously, thank you for helping us reach $20 million in donations. Every roll counts. <a href="#">Learn more about our impact &rarr;</a>
+  </div>
+
+  <!-- Shared header script -->
+  <script src="../shared/header.js"></script>
+
+  <script>
+    /* ===========================================
+       INLINE JS — Receipt interactions
+       =========================================== */
+
+    // --- Scroll progress bar ---
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    })();
+
+    // --- Generate barcode bars ---
+    (function () {
+      const barcodeEl = document.getElementById('barcode');
+      if (!barcodeEl) return;
+      // Pseudo-random barcode pattern
+      const pattern = [3,1,2,1,3,2,1,1,3,1,2,3,1,1,2,1,3,1,2,1,1,3,2,1,3,1,1,2,1,3,2,1,1,3,1,2,1,3,1,2,3,1,1,2,3,1,2,1,1,3,2,1,3,1,2,1];
+      const heights = [46,46,30,46,46,30,46,30,46,46,30,46,30,46,46,30,46,46,30,46,30,46,46,30,46,30,46,46,30,46,46,30,46,30,46,46,30,46,46,30,46,30,46,46,30,46,46,30,46,30,46,46,30,46,46,30];
+      for (let i = 0; i < pattern.length; i++) {
+        const span = document.createElement('span');
+        span.style.width = pattern[i] + 'px';
+        span.style.height = heights[i] + 'px';
+        barcodeEl.appendChild(span);
+      }
+    })();
+
+    // --- Intersection Observer: fade in receipt elements ---
+    (function () {
+      const targets = document.querySelectorAll(
+        '.receipt-paper .line-item, .receipt-paper .section-header, ' +
+        '.receipt-paper .subtotal-row, .receipt-paper .sep, ' +
+        '.receipt-paper .sep-double, .receipt-paper .line-qty'
+      );
+
+      // If IntersectionObserver is not supported, show everything
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.1
+      });
+
+      targets.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

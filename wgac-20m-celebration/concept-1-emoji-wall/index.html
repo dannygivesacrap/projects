@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20 Million Craps | Who Gives A Crap</title>
+  <meta name="description" content="We've donated $20,000,000. That's a LOT of craps given. Scroll through them all (well, almost).">
+  <link rel="stylesheet" href="../shared/header.css">
+  <style>
+    /* =============================================
+       EMOJI WALL — Concept 1
+       "20 Million Craps" celebration page
+       ============================================= */
+
+    /* --- Hand-drawn / playful feel --- */
+    @keyframes wobble {
+      0%, 100% { transform: rotate(-1deg); }
+      50% { transform: rotate(1deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes counterPulse {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.05); }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
+    }
+
+    /* --- Page layout --- */
+    body {
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Hero section --- */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: var(--wgac-yellow);
+      border-radius: 50%;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 150px;
+      height: 150px;
+      background: var(--wgac-teal);
+      border-radius: 50%;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--wgac-coral);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      animation: wobble 3s ease-in-out infinite;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--wgac-navy);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .number {
+      color: var(--wgac-coral);
+      display: block;
+      font-size: 1.2em;
+      position: relative;
+    }
+
+    .hero h1 .number::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 6px;
+      background: var(--wgac-yellow);
+      border-radius: 3px;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--wgac-navy);
+      opacity: 0.75;
+      max-width: 550px;
+      margin: 20px auto 0;
+      line-height: 1.6;
+    }
+
+    .hero .scroll-hint {
+      margin-top: 40px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      color: var(--wgac-teal);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .hero .scroll-hint .arrow {
+      display: block;
+      font-size: 1.8rem;
+      margin-top: 4px;
+    }
+
+    /* --- Emoji wall --- */
+    .emoji-wall-intro {
+      text-align: center;
+      padding: 40px 24px 20px;
+      position: relative;
+    }
+
+    .emoji-wall-intro p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--wgac-navy);
+      opacity: 0.6;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .emoji-wall-intro .multiplier-note {
+      display: inline-block;
+      margin-top: 12px;
+      background: var(--wgac-navy);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 6px 18px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .emoji-wall-intro .multiplier-note::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: var(--wgac-navy);
+    }
+
+    .emoji-wall {
+      padding: 10px 8px;
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      line-height: 1.25;
+      word-break: break-all;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: default;
+      position: relative;
+    }
+
+    /* Subtle row shading for visual texture */
+    .emoji-wall .emoji-row:nth-child(even) {
+      opacity: 0.92;
+    }
+
+    /* --- Floating scroll counter pill --- */
+    .scroll-counter {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--wgac-navy);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      padding: 10px 24px;
+      border-radius: 50px;
+      box-shadow: 0 6px 24px rgba(1, 22, 39, 0.3);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .scroll-counter.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-counter .counter-emoji {
+      font-size: 1.3em;
+      animation: wiggle 1s ease-in-out infinite;
+    }
+
+    .scroll-counter .counter-number {
+      color: var(--wgac-yellow);
+      font-size: 1.1em;
+    }
+
+    /* Progress bar inside the pill */
+    .scroll-counter .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--wgac-teal);
+      border-radius: 0 0 50px 50px;
+      transition: width 0.15s ease;
+    }
+
+    /* --- Reveal / punchline section --- */
+    .reveal-section {
+      text-align: center;
+      padding: 100px 24px 120px;
+      position: relative;
+      overflow: hidden;
+      background: var(--wgac-navy);
+      color: #fff;
+    }
+
+    .reveal-section::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--wgac-light-bg);
+      border-radius: 0 0 50% 50%;
+    }
+
+    .reveal-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .reveal-big-emoji {
+      font-size: clamp(4rem, 12vw, 8rem);
+      display: block;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .reveal-section h2 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .reveal-section h2 .highlight {
+      color: var(--wgac-coral);
+      position: relative;
+      display: inline-block;
+    }
+
+    .reveal-section h2 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: -4px;
+      right: -4px;
+      height: 8px;
+      background: var(--wgac-coral);
+      opacity: 0.3;
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .reveal-amount {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--wgac-teal);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .reveal-description {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      opacity: 0.8;
+      line-height: 1.7;
+      max-width: 550px;
+      margin: 0 auto 40px;
+    }
+
+    .reveal-cta {
+      display: inline-block;
+      background: var(--wgac-coral);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 16px rgba(255, 107, 107, 0.4);
+      border: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reveal-cta:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 28px rgba(255, 107, 107, 0.5);
+      background: #ff5252;
+    }
+
+    .reveal-cta:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Squiggly hand-drawn line decorations */
+    .squiggle {
+      display: block;
+      margin: 30px auto;
+      max-width: 200px;
+    }
+
+    /* Stats row */
+    .reveal-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+
+    .reveal-stat {
+      text-align: center;
+    }
+
+    .reveal-stat .stat-number {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--wgac-yellow);
+      display: block;
+    }
+
+    .reveal-stat .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+
+    /* --- Share bar --- */
+    .share-bar {
+      background: var(--wgac-teal);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .share-bar p {
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .share-btn {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* --- Confetti overlay --- */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: confettiFall linear forwards;
+      opacity: 0;
+    }
+
+    /* --- Footer --- */
+    .page-footer {
+      background: var(--wgac-navy);
+      color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* --- Responsive tweaks --- */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 50px 16px 40px;
+      }
+
+      .emoji-wall {
+        font-size: 0.9rem;
+        padding: 8px 4px;
+      }
+
+      .scroll-counter {
+        bottom: 16px;
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+
+      .reveal-section {
+        padding: 80px 20px 80px;
+      }
+
+      .reveal-stats {
+        gap: 24px;
+      }
+
+      .reveal-cta {
+        padding: 14px 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .scroll-counter {
+        font-size: 0.75rem;
+        padding: 7px 14px;
+        gap: 5px;
+      }
+
+      .share-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">A Milestone Worth Celebrating</div>
+      <h1>
+        <span class="number">20,000,000</span>
+        Craps. Given.
+      </h1>
+      <p>We've donated twenty million dollars to help build toilets and improve sanitation around the world. But what does 20 million actually look like?</p>
+      <div class="scroll-hint">
+        Scroll down to find out
+        <span class="arrow">&darr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       EMOJI WALL INTRO
+       ============================================ -->
+  <section class="emoji-wall-intro">
+    <p>Below is a wall of 200,000 little craps. Each one represents $100 donated.</p>
+    <div class="multiplier-note">That's only 1/100th of the real total. Imagine this... x100.</div>
+  </section>
+
+  <!-- ============================================
+       THE MASSIVE EMOJI WALL (generated by JS)
+       ============================================ -->
+  <div class="emoji-wall" id="emojiWall" aria-label="A wall of 200,000 poop emojis representing donations">
+    <!-- JS fills this -->
+  </div>
+
+  <!-- ============================================
+       SCROLL COUNTER (floating pill)
+       ============================================ -->
+  <div class="scroll-counter" id="scrollCounter">
+    <span class="counter-emoji">&#x1F4A9;</span>
+    You've scrolled past <span class="counter-number" id="counterNumber">0</span> &#x1F4A9;
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- ============================================
+       REVEAL / PUNCHLINE SECTION
+       ============================================ -->
+  <section class="reveal-section" id="revealSection">
+    <div class="reveal-content">
+      <span class="reveal-big-emoji">&#x1F6BD;</span>
+      <h2>That's how many craps <span class="highlight">we give.</span></h2>
+      <span class="reveal-amount">$20,000,000</span>
+      <p class="reveal-description">
+        donated to help build toilets and improve sanitation for communities around the world that need it most.
+        Every roll you bought helped make this happen.
+      </p>
+
+      <!-- Hand-drawn squiggly SVG divider -->
+      <svg class="squiggle" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 6 C 20 2, 30 10, 50 6 C 70 2, 80 10, 100 6 C 120 2, 130 10, 150 6 C 170 2, 180 10, 198 6"
+              stroke="#2EC4B6" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      </svg>
+
+      <a href="#" class="reveal-cta">See Our Impact &rarr;</a>
+
+      <div class="reveal-stats">
+        <div class="reveal-stat">
+          <span class="stat-number">2B+</span>
+          <span class="stat-label">people lack safe sanitation</span>
+        </div>
+        <div class="reveal-stat">
+          <span class="stat-number">47</span>
+          <span class="stat-label">countries supported</span>
+        </div>
+        <div class="reveal-stat">
+          <span class="stat-number">200+</span>
+          <span class="stat-label">projects funded</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SHARE BAR
+       ============================================ -->
+  <section class="share-bar">
+    <p>Spread the word (not the germs)</p>
+    <div class="share-buttons">
+      <a class="share-btn" id="shareTwitter" href="#">Share on X / Twitter</a>
+      <a class="share-btn" id="shareFacebook" href="#">Share on Facebook</a>
+      <a class="share-btn" id="shareCopy" href="#">Copy Link</a>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    &copy; 2026 Who Gives A Crap. All rights (and rolls) reserved.
+  </footer>
+
+  <!-- ============================================
+       CONFETTI CONTAINER (JS-driven)
+       ============================================ -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <!-- Shared header JS (injects WGAC nav) -->
+  <script src="../shared/header.js"></script>
+
+  <script>
+    /* ==============================================
+       EMOJI WALL GENERATOR & SCROLL COUNTER
+       ============================================== */
+    (function () {
+      'use strict';
+
+      // ---------- CONFIG ----------
+      var TOTAL_EMOJIS = 200000;
+      var EMOJIS_PER_CHUNK = 10000;
+      var MULTIPLIER = 100;
+      var TOTAL_REPRESENTED = TOTAL_EMOJIS * MULTIPLIER; // 20,000,000
+      var POOP = '\uD83D\uDCA9'; // U+1F4A9
+
+      // ---------- DOM REFS ----------
+      var wall = document.getElementById('emojiWall');
+      var counter = document.getElementById('scrollCounter');
+      var counterNumber = document.getElementById('counterNumber');
+      var progressBar = document.getElementById('progressBar');
+      var revealSection = document.getElementById('revealSection');
+
+      // ---------- BUILD EMOJI WALL IN CHUNKS ----------
+      // We build a huge string, then inject it.  Doing it in one go with
+      // textContent is the fastest way to get 200k chars into the DOM
+      // without layout thrashing.
+
+      function buildEmojiWall() {
+        // Create the emoji string — 200,000 poop emojis with occasional
+        // spacing for word-wrap to work nicely.
+        var batchSize = 50; // emojis per "word" before a space
+        var parts = [];
+        for (var i = 0; i < TOTAL_EMOJIS; i++) {
+          parts.push(POOP);
+          if ((i + 1) % batchSize === 0) {
+            parts.push(' ');
+          }
+        }
+        // Use a single text node for performance
+        var textNode = document.createTextNode(parts.join(''));
+        wall.appendChild(textNode);
+      }
+
+      // ---------- FORMAT NUMBER WITH COMMAS ----------
+      function formatNumber(n) {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
+
+      // ---------- SCROLL TRACKING ----------
+      var wallTop = 0;
+      var wallHeight = 0;
+      var ticking = false;
+      var hasReachedBottom = false;
+
+      function recalcPositions() {
+        var rect = wall.getBoundingClientRect();
+        wallTop = rect.top + window.pageYOffset;
+        wallHeight = rect.height;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateCounter);
+          ticking = true;
+        }
+      }
+
+      function updateCounter() {
+        ticking = false;
+
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        var viewportH = window.innerHeight;
+
+        // How far through the wall are we?
+        var wallBottom = wallTop + wallHeight;
+        var scrolledIntoWall = (scrollY + viewportH) - wallTop;
+        var progress = Math.max(0, Math.min(1, scrolledIntoWall / wallHeight));
+
+        // Show / hide counter
+        var inWallZone = scrollY + viewportH > wallTop && scrollY < wallBottom + viewportH;
+        if (inWallZone) {
+          counter.classList.add('visible');
+        } else {
+          counter.classList.remove('visible');
+        }
+
+        // Compute emoji count — we show the REPRESENTED total (x100)
+        var emojiCount = Math.floor(progress * TOTAL_REPRESENTED);
+        counterNumber.textContent = formatNumber(emojiCount);
+
+        // Progress bar
+        progressBar.style.width = (progress * 100) + '%';
+
+        // Trigger confetti when reaching the bottom
+        if (progress > 0.98 && !hasReachedBottom) {
+          hasReachedBottom = true;
+          launchConfetti();
+        }
+      }
+
+      // ---------- CONFETTI ----------
+      function launchConfetti() {
+        var container = document.getElementById('confettiContainer');
+        var colors = ['#FF6B6B', '#2EC4B6', '#FF9F1C', '#FFBF69', '#fff'];
+        var shapes = ['circle', 'square'];
+        var count = 80;
+
+        for (var i = 0; i < count; i++) {
+          (function (index) {
+            setTimeout(function () {
+              var piece = document.createElement('div');
+              piece.className = 'confetti-piece';
+              var color = colors[Math.floor(Math.random() * colors.length)];
+              var shape = shapes[Math.floor(Math.random() * shapes.length)];
+              var size = Math.random() * 8 + 6;
+              var left = Math.random() * 100;
+              var duration = Math.random() * 2 + 2.5;
+              var delay = Math.random() * 0.3;
+
+              piece.style.left = left + '%';
+              piece.style.width = size + 'px';
+              piece.style.height = size + 'px';
+              piece.style.background = color;
+              piece.style.borderRadius = shape === 'circle' ? '50%' : '2px';
+              piece.style.animationDuration = duration + 's';
+              piece.style.animationDelay = delay + 's';
+              piece.style.opacity = '1';
+
+              container.appendChild(piece);
+
+              // Clean up after animation
+              setTimeout(function () {
+                if (piece.parentNode) piece.parentNode.removeChild(piece);
+              }, (duration + delay) * 1000 + 200);
+            }, index * 25);
+          })(i);
+        }
+      }
+
+      // ---------- SHARE BUTTONS ----------
+      function setupShare() {
+        var pageUrl = window.location.href;
+        var text = "Who Gives A Crap just hit $20,000,000 in donations. That's 20 MILLION craps given. \uD83D\uDCA9\uD83C\uDF89";
+
+        var twitterBtn = document.getElementById('shareTwitter');
+        var facebookBtn = document.getElementById('shareFacebook');
+        var copyBtn = document.getElementById('shareCopy');
+
+        twitterBtn.href = 'https://twitter.com/intent/tweet?text=' +
+          encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl);
+        twitterBtn.target = '_blank';
+        twitterBtn.rel = 'noopener noreferrer';
+
+        facebookBtn.href = 'https://www.facebook.com/sharer/sharer.php?u=' +
+          encodeURIComponent(pageUrl);
+        facebookBtn.target = '_blank';
+        facebookBtn.rel = 'noopener noreferrer';
+
+        copyBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(pageUrl).then(function () {
+              copyBtn.textContent = 'Copied!';
+              setTimeout(function () {
+                copyBtn.textContent = 'Copy Link';
+              }, 2000);
+            });
+          }
+        });
+      }
+
+      // ---------- REVEAL SECTION ANIMATION ----------
+      function setupRevealObserver() {
+        if (!('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.animation = 'slideUp 0.8s ease forwards';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        var revealContent = document.querySelector('.reveal-content');
+        if (revealContent) {
+          revealContent.style.opacity = '0';
+          revealContent.style.transform = 'translateY(40px)';
+          observer.observe(revealContent);
+        }
+      }
+
+      // ---------- INIT ----------
+      function init() {
+        buildEmojiWall();
+
+        // Allow layout to settle, then compute positions
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            recalcPositions();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+              recalcPositions();
+            });
+            // Trigger once on load in case page loaded mid-scroll
+            updateCounter();
+          });
+        });
+
+        setupShare();
+        setupRevealObserver();
+      }
+
+      // Fire on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
