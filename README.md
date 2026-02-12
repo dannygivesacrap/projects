@@ -1,20 +1,17 @@
-# Tests
+# Projects
 
 A collection of small experiments, landing pages, and prototypes.
 
-## Projects
-
 | Project | Description |
 |---------|-------------|
-| [splooge-landing](projects/splooge-landing/) | Splooge brand landing page |
+| [splooge-landing](splooge-landing/) | Splooge brand landing page |
 
 ## Adding a new project
 
-Create a new directory under `projects/`:
+Create a new directory at the repo root:
 
 ```
-projects/
-  splooge-landing/
-  my-new-test/
-    index.html
+splooge-landing/
+my-new-test/
+  index.html
 ```
